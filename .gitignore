@@ -340,9 +340,9 @@ ASALocalRun/
 healthchecksdb
 
 #Custom
-/Binaries/
-/Saved/
-/Intermediate/
-/DerivedDataCache/
-/Content/
-/Config/
+/Binaries/*
+/Saved/*
+/Intermediate/*
+/DerivedDataCache/*
+/Content/*
+/Config/*
