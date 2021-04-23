@@ -1,8 +1,0 @@
-{
-	"SourceFiles": [
-		"D:\\Unreal Projects\\OneMoveAtATime\\Source\\OneMoveAtATime\\OneMoveAtATime.Build.cs",
-		"D:\\Unreal Projects\\OneMoveAtATime\\Source\\OneMoveAtATime.Target.cs",
-		"D:\\Unreal Projects\\OneMoveAtATime\\Source\\OneMoveAtATimeEditor.Target.cs"
-	],
-	"EngineVersion": "4.26.0"
-}
