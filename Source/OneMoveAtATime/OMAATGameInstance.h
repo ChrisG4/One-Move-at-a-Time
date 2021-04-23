@@ -1,0 +1,19 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "Engine/GameInstance.h"
+#include "OMAATGameInstance.generated.h"
+
+/**
+ * 
+ */
+UCLASS()
+class ONEMOVEATATIME_API UOMAATGameInstance : public UGameInstance
+{
+	GENERATED_BODY()
+
+public:
+	
+};

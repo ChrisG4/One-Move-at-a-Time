@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "OneMoveAtATime",
+			"Path": "D:\\Unreal Projects\\OneMoveAtATime\\Source\\OneMoveAtATime.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "OneMoveAtATimeEditor",
+			"Path": "D:\\Unreal Projects\\OneMoveAtATime\\Source\\OneMoveAtATimeEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
