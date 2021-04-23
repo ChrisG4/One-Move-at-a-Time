@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/TriggerBox.h"
+#include "..\OMAATGameInstance.h"
 #include "GridBox.generated.h"
 
 /**
@@ -21,7 +22,7 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	FVector2D GridCoord;
 
-	const int32 BoxSize = 100;
+	const int32 BoxSize = UOMAATGameInstance::GridBoxSize;
 
 public:
 	AGridBox();

@@ -15,5 +15,7 @@ class ONEMOVEATATIME_API UOMAATGameInstance : public UGameInstance
 	GENERATED_BODY()
 
 public:
+
+	static const int32 GridBoxSize = 100;
 	
 };
