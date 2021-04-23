@@ -19,7 +19,7 @@ void AGridBox::BeginPlay()
 			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Invalid Box Placement at " + GetActorLocation().ToString()));
 	}
 	
-	SetGridIndex();
+	SetGridCoord();
 	DrawDebugBox(GetWorld(), GetActorLocation(), GetComponentsBoundingBox().GetExtent(), FColor::Green, true, -1, 0, 2);
 }
 
@@ -39,7 +39,7 @@ bool AGridBox::IsPlacementValid()
 	}
 }
 
-void AGridBox::SetGridIndex()
+void AGridBox::SetGridCoord()
 {
 	FVector BoxPos = GetActorLocation();
 
@@ -47,4 +47,9 @@ void AGridBox::SetGridIndex()
 	int YCoord = BoxPos.Y / BoxSize;
 
 	GridCoord = FVector2D(XCoord, YCoord);
+}
+
+FVector2D AGridBox::GetGridCoord()
+{
+	return this->GridCoord;
 }

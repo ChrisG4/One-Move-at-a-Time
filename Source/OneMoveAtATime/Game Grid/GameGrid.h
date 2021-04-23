@@ -22,10 +22,20 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditDefaultsOnly)
-	TSubclassOf<AGridBox> GridBoxType;
+		TSubclassOf<AGridBox> GridBoxType;
+
+	UPROPERTY(EditAnywhere, meta = (MakeEditWidget = "true"))
+		TArray<FVector> GridBoxPositions;
+
+	UPROPERTY()
+		TMap<FVector2D, AGridBox*> GridBoxes;
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	void SpawnGridBoxes();
+
+	bool IsGridSpaceFree(FVector2D GridCoord);
 
 };

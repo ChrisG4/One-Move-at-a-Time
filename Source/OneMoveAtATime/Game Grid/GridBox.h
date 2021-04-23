@@ -28,6 +28,7 @@ public:
 	AGridBox();
 
 	bool IsPlacementValid();
-	void SetGridIndex();
+	void SetGridCoord();
 
+	FVector2D GetGridCoord();
 };

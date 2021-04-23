@@ -15,20 +15,36 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 void APlayerCharacter::MoveUp()
 {
-	SetActorLocation(GetActorLocation() + FVector(0, MoveSpeed, 0));
+	if (GameGrid != nullptr && GameGrid->IsGridSpaceFree(GridPos + FVector2D(0, 1)))
+	{
+		SetActorLocation(GetActorLocation() + FVector(0, MoveSpeed, 0));
+		GridPos += FVector2D(0, 1);
+	}
 }
 
 void APlayerCharacter::MoveDown()
 {
-	SetActorLocation(GetActorLocation() + FVector(0, -MoveSpeed, 0));
+	if (GameGrid != nullptr && GameGrid->IsGridSpaceFree(GridPos + FVector2D(0, -1)))
+	{
+		SetActorLocation(GetActorLocation() + FVector(0, -MoveSpeed, 0));
+		GridPos += FVector2D(0, -1);
+	}
 }
 
 void APlayerCharacter::MoveLeft()
 {
-	SetActorLocation(GetActorLocation() + FVector(MoveSpeed, 0, 0));
+	if (GameGrid != nullptr && GameGrid->IsGridSpaceFree(GridPos + FVector2D(1, 0)))
+	{
+		SetActorLocation(GetActorLocation() + FVector(MoveSpeed, 0, 0));
+		GridPos += FVector2D(1, 0);
+	}
 }
 
 void APlayerCharacter::MoveRight()
 {
-	SetActorLocation(GetActorLocation() + FVector(-MoveSpeed, 0, 0));
+	if (GameGrid != nullptr && GameGrid->IsGridSpaceFree(GridPos + FVector2D(-1, 0)))
+	{
+		SetActorLocation(GetActorLocation() + FVector(-MoveSpeed, 0, 0));
+		GridPos += FVector2D(-1, 0);
+	}
 }

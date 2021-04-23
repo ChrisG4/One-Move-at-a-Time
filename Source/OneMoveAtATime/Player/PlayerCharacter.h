@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "..\Creatures/Creature.h"
 #include "..\OMAATGameInstance.h"
+#include "..\Game Grid/GameGrid.h"
 #include "PlayerCharacter.generated.h"
 
 /**
@@ -19,6 +20,10 @@ protected:
 
 	void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
+	UPROPERTY(EditAnywhere)
+		AGameGrid* GameGrid;
+
+	FVector2D GridPos = FVector2D (0, 0);
 	int32 MoveSpeed = UOMAATGameInstance::GridBoxSize;
 
 public:
