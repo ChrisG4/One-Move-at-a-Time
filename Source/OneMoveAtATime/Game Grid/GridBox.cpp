@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "GridBox.h"
+#include "DrawDebugHelpers.h"
 
 #include "..\OMAATGameInstance.h"
 
@@ -19,6 +20,7 @@ void AGridBox::BeginPlay()
 	}
 	
 	SetGridIndex();
+	DrawDebugBox(GetWorld(), GetActorLocation(), GetComponentsBoundingBox().GetExtent(), FColor::Green, true, -1, 0, 2);
 }
 
 bool AGridBox::IsPlacementValid()
