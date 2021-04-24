@@ -24,7 +24,6 @@ protected:
 		AGameGrid* GameGrid;
 
 	FVector2D GridPos = FVector2D (0, 0);
-	int32 MoveSpeed = UOMAATGameInstance::GridBoxSize;
 
 public:
 

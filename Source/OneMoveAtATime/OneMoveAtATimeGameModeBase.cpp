@@ -3,3 +3,8 @@
 
 #include "OneMoveAtATimeGameModeBase.h"
 
+void AOneMoveAtATimeGameModeBase::BeginPlay()
+{
+	Super::BeginPlay();
+
+}

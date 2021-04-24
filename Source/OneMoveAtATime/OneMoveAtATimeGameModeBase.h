@@ -14,4 +14,7 @@ class ONEMOVEATATIME_API AOneMoveAtATimeGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 	
+protected:
+
+	void BeginPlay() override;
 };

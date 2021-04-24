@@ -6,11 +6,6 @@
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-	PlayerInputComponent->BindAction("MoveUp", IE_Pressed, this, &APlayerCharacter::MoveUp);
-	PlayerInputComponent->BindAction("MoveDown", IE_Pressed, this, &APlayerCharacter::MoveDown);
-	PlayerInputComponent->BindAction("MoveLeft", IE_Pressed, this, &APlayerCharacter::MoveLeft);
-	PlayerInputComponent->BindAction("MoveRight", IE_Pressed, this, &APlayerCharacter::MoveRight);
 }
 
 void APlayerCharacter::MoveUp()

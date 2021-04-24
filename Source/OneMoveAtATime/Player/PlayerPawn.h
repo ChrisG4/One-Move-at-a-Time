@@ -4,29 +4,39 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
-#include "..\OMAATGameInstance.h"
-#include "Creature.generated.h"
+#include "PlayerCharacter.h"
+#include "..\Creatures\Enemy.h"
+#include "PlayerPawn.generated.h"
 
 UCLASS()
-class ONEMOVEATATIME_API ACreature : public APawn
+class ONEMOVEATATIME_API APlayerPawn : public APawn
 {
 	GENERATED_BODY()
 
-public:
-	// Sets default values for this pawn's properties
-	ACreature();
+
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	int32 MoveSpeed = UOMAATGameInstance::GridBoxSize;
+	UPROPERTY(EditAnywhere)
+		APlayerCharacter* MainPlayer;
+
+	UPROPERTY(EditAnywhere)
+		TArray<AEnemy*> Enemies;
 
 public:	
-	// Called every frame
+	APlayerPawn();
+
 	virtual void Tick(float DeltaTime) override;
 
-	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	void PlayerMoveUp();
+	void PlayerMoveDown();
+	void PlayerMoveLeft();
+	void PlayerMoveRight();
+
+	void MoveEnemies();
 
 };
