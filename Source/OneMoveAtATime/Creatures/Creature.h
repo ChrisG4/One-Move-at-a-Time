@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "..\OMAATGameInstance.h"
+#include "..\Game Grid/GameGrid.h"
 #include "Creature.generated.h"
 
 UCLASS()
@@ -22,11 +23,26 @@ protected:
 
 	int32 MoveSpeed = UOMAATGameInstance::GridBoxSize;
 
+	UPROPERTY(EditAnywhere, Category = "Grid Information")
+		AGameGrid* GameGrid;
+
+	UPROPERTY(VisibleAnywhere, Category = "Grid Information")
+		FVector2D GridPos;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	UFUNCTION(BlueprintCallable)
+		void MoveUp();
+	UFUNCTION(BlueprintCallable)
+		void MoveDown();
+	UFUNCTION(BlueprintCallable)
+		void MoveLeft();
+	UFUNCTION(BlueprintCallable)
+		void MoveRight();
 
 };

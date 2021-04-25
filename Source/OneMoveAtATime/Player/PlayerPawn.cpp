@@ -15,7 +15,6 @@ APlayerPawn::APlayerPawn()
 void APlayerPawn::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -54,6 +53,7 @@ void APlayerPawn::PlayerMoveDown()
 {
 	if (MainPlayer != nullptr)
 	{
+		
 		MainPlayer->MoveDown();
 	}
 }

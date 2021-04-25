@@ -20,21 +20,8 @@ protected:
 
 	void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
-	UPROPERTY(EditAnywhere)
-		AGameGrid* GameGrid;
 
-	FVector2D GridPos = FVector2D (0, 0);
 
 public:
-
-	UFUNCTION(BlueprintCallable)
-		void MoveUp();
-	UFUNCTION(BlueprintCallable)
-		void MoveDown();
-	UFUNCTION(BlueprintCallable)
-		void MoveLeft();
-	UFUNCTION(BlueprintCallable)
-		void MoveRight();
-
 
 };
