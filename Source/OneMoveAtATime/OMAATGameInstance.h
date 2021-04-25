@@ -17,5 +17,7 @@ class ONEMOVEATATIME_API UOMAATGameInstance : public UGameInstance
 public:
 
 	static const int32 GridBoxSize = 100;
+
+	static void Print(FString Text);
 	
 };
