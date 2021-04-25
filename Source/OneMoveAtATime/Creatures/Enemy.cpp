@@ -10,5 +10,5 @@ void AEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void AEnemy::OnPlayerMove()
 {
-	MoveDown();
+
 }

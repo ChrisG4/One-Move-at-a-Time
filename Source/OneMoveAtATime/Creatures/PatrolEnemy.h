@@ -9,9 +9,35 @@
 /**
  * 
  */
+
+UENUM()
+enum Direction
+{
+	Up UMETA(DisplayName = "Up"), 
+	Down UMETA(DisplayName = "Down"), 
+	Left UMETA(DisplayName = "Left"), 
+	Right UMETA(DisplayName = "Right"),
+};
+
 UCLASS()
 class ONEMOVEATATIME_API APatrolEnemy : public AEnemy
 {
 	GENERATED_BODY()
 	
+protected:
+
+	void BeginPlay() override;
+
+	UPROPERTY(EditAnywhere, Category = "Patrolling")
+		TEnumAsByte<Direction> InitialMoveDirection;
+	
+	UPROPERTY(VisibleAnywhere, Category = "Patrolling")
+		TEnumAsByte<Direction> CurrentMoveDirection;
+
+public:
+
+	void OnPlayerMove() override;
+
+	void UpdateMoveDirection();
+
 };

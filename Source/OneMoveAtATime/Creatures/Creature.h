@@ -37,12 +37,12 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UFUNCTION(BlueprintCallable)
-		void MoveUp();
+		virtual void MoveUp();
 	UFUNCTION(BlueprintCallable)
-		void MoveDown();
+		virtual void MoveDown();
 	UFUNCTION(BlueprintCallable)
-		void MoveLeft();
+		virtual void MoveLeft();
 	UFUNCTION(BlueprintCallable)
-		void MoveRight();
+		virtual void MoveRight();
 
 };
