@@ -23,7 +23,7 @@ protected:
 
 	int32 MoveSpeed = UOMAATGameInstance::GridBoxSize;
 
-	UPROPERTY(EditAnywhere, Category = "Grid Information")
+	UPROPERTY(BlueprintReadWrite)
 		AGameGrid* GameGrid;
 
 	UPROPERTY(VisibleAnywhere, Category = "Grid Information")
