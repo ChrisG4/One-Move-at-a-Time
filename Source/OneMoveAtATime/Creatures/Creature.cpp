@@ -34,37 +34,41 @@ void ACreature::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void ACreature::MoveUp()
 {
-	if (GameGrid != nullptr && GameGrid->IsGridSpaceFree(GridPos + FVector2D(0, 1)))
+	FVector2D UpVec = FVector2D(0, -1);
+	if (GameGrid != nullptr && GameGrid->IsGridSpaceFree(GridPos + UpVec))
 	{
-		SetActorLocation(GetActorLocation() + FVector(0, MoveSpeed, 0));
-		GridPos += FVector2D(0, 1);
+		SetActorLocation(GetActorLocation() + FVector(UpVec * MoveSpeed, 0));
+		GridPos += UpVec;
 	}
 }
 
 void ACreature::MoveDown()
 {
-	if (GameGrid != nullptr && GameGrid->IsGridSpaceFree(GridPos + FVector2D(0, -1)))
+	FVector2D DownVec = FVector2D(0, 1);
+	if (GameGrid != nullptr && GameGrid->IsGridSpaceFree(GridPos + DownVec))
 	{
-		SetActorLocation(GetActorLocation() + FVector(0, -MoveSpeed, 0));
-		GridPos += FVector2D(0, -1);
+		SetActorLocation(GetActorLocation() + FVector(DownVec * MoveSpeed, 0));
+		GridPos += DownVec;
 	}
 }
 
 void ACreature::MoveLeft()
 {
-	if (GameGrid != nullptr && GameGrid->IsGridSpaceFree(GridPos + FVector2D(1, 0)))
+	FVector2D LeftVec = FVector2D(-1, 0);
+	if (GameGrid != nullptr && GameGrid->IsGridSpaceFree(GridPos + LeftVec))
 	{
-		SetActorLocation(GetActorLocation() + FVector(MoveSpeed, 0, 0));
-		GridPos += FVector2D(1, 0);
+		SetActorLocation(GetActorLocation() + FVector(LeftVec * MoveSpeed, 0));
+		GridPos += LeftVec;
 	}
 }
 
 void ACreature::MoveRight()
 {
-	if (GameGrid != nullptr && GameGrid->IsGridSpaceFree(GridPos + FVector2D(-1, 0)))
+	FVector2D RightVec = FVector2D(1, 0);
+	if (GameGrid != nullptr && GameGrid->IsGridSpaceFree(GridPos + RightVec))
 	{
-		SetActorLocation(GetActorLocation() + FVector(-MoveSpeed, 0, 0));
-		GridPos += FVector2D(-1, 0);
+		SetActorLocation(GetActorLocation() + FVector(RightVec * MoveSpeed, 0));
+		GridPos += RightVec;
 	}
 }
 
