@@ -33,44 +33,41 @@ void APlayerPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	PlayerInputComponent->BindAction("MoveDown", IE_Pressed, this, &APlayerPawn::PlayerMoveDown);
 	PlayerInputComponent->BindAction("MoveLeft", IE_Pressed, this, &APlayerPawn::PlayerMoveLeft);
 	PlayerInputComponent->BindAction("MoveRight", IE_Pressed, this, &APlayerPawn::PlayerMoveRight);
-
-	PlayerInputComponent->BindAction("MoveUp", IE_Pressed, this, &APlayerPawn::MoveEnemies);
-	PlayerInputComponent->BindAction("MoveDown", IE_Pressed, this, &APlayerPawn::MoveEnemies);
-	PlayerInputComponent->BindAction("MoveLeft", IE_Pressed, this, &APlayerPawn::MoveEnemies);
-	PlayerInputComponent->BindAction("MoveRight", IE_Pressed, this, &APlayerPawn::MoveEnemies);
-
 }
 
 void APlayerPawn::PlayerMoveUp()
 {
-	if (MainPlayer != nullptr)
+	if (MainPlayer != nullptr && MainPlayer->CanMoveToGridSpace(MainPlayer->GetGridPos() + FVector2D(0, -1)))
 	{
 		MainPlayer->MoveUp();
+		MoveEnemies();
 	}
 }
 
 void APlayerPawn::PlayerMoveDown()
 {
-	if (MainPlayer != nullptr)
+	if (MainPlayer != nullptr && MainPlayer->CanMoveToGridSpace(MainPlayer->GetGridPos() + FVector2D(0, 1)))
 	{
-		
 		MainPlayer->MoveDown();
+		MoveEnemies();
 	}
 }
 
 void APlayerPawn::PlayerMoveLeft()
 {
-	if (MainPlayer != nullptr)
+	if (MainPlayer != nullptr && MainPlayer->CanMoveToGridSpace(MainPlayer->GetGridPos() + FVector2D(-1, 0)))
 	{
 		MainPlayer->MoveLeft();
+		MoveEnemies();
 	}
 }
 
 void APlayerPawn::PlayerMoveRight()
 {
-	if (MainPlayer != nullptr)
+	if (MainPlayer != nullptr && MainPlayer->CanMoveToGridSpace(MainPlayer->GetGridPos() + FVector2D(1, 0)))
 	{
 		MainPlayer->MoveRight();
+		MoveEnemies();
 	}
 }
 

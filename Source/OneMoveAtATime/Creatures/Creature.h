@@ -36,13 +36,16 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	UFUNCTION(BlueprintCallable)
-		virtual void MoveUp();
-	UFUNCTION(BlueprintCallable)
-		virtual void MoveDown();
-	UFUNCTION(BlueprintCallable)
-		virtual void MoveLeft();
-	UFUNCTION(BlueprintCallable)
-		virtual void MoveRight();
+	//GET CREATURE INFO
+	FVector2D GetGridPos();
+	
+	//MOVEMENT CHECKS
+	bool CanMoveToGridSpace(FVector2D GridSpace);
+
+	//MOVEMENT FUNCTIONS
+	virtual void MoveUp();
+	virtual void MoveDown();
+	virtual void MoveLeft();
+	virtual void MoveRight();
 
 };
