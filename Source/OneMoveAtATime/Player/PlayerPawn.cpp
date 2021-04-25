@@ -41,6 +41,7 @@ void APlayerPawn::PlayerMoveUp()
 	{
 		MainPlayer->MoveUp();
 		MoveEnemies();
+		DidPlayerDie();
 	}
 }
 
@@ -50,6 +51,7 @@ void APlayerPawn::PlayerMoveDown()
 	{
 		MainPlayer->MoveDown();
 		MoveEnemies();
+		DidPlayerDie();
 	}
 }
 
@@ -59,6 +61,7 @@ void APlayerPawn::PlayerMoveLeft()
 	{
 		MainPlayer->MoveLeft();
 		MoveEnemies();
+		DidPlayerDie();
 	}
 }
 
@@ -68,6 +71,7 @@ void APlayerPawn::PlayerMoveRight()
 	{
 		MainPlayer->MoveRight();
 		MoveEnemies();
+		DidPlayerDie();
 	}
 }
 
@@ -77,4 +81,19 @@ void APlayerPawn::MoveEnemies()
 	{
 		Enemies[i]->OnPlayerMove();
 	}
+}
+
+bool APlayerPawn::DidPlayerDie()
+{
+	for (int i{ 0 }; i < Enemies.Num(); i++)
+	{
+		if (Enemies[i]->GetGridPos() == MainPlayer->GetGridPos() ||
+			(Enemies[i]->GetPrevGridPos() == MainPlayer->GetGridPos()) && (Enemies[i]->GetGridPos() == MainPlayer->GetPrevGridPos()))
+		{
+			if (GEngine)GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "PLAYER DEAD");
+			return true;
+		}
+	}
+
+	return false;
 }

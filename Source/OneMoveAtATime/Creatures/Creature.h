@@ -29,6 +29,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Grid Information")
 		FVector2D GridPos;
 
+	UPROPERTY(VisibleAnywhere, Category = "Grid Information")
+		FVector2D PrevGridPos;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -38,6 +41,7 @@ public:
 
 	//GET CREATURE INFO
 	FVector2D GetGridPos();
+	FVector2D GetPrevGridPos();
 	
 	//MOVEMENT CHECKS
 	bool CanMoveToGridSpace(FVector2D GridSpace);

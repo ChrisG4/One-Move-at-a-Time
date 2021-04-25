@@ -37,6 +37,11 @@ FVector2D ACreature::GetGridPos()
 	return GridPos;
 }
 
+FVector2D ACreature::GetPrevGridPos()
+{
+	return PrevGridPos;
+}
+
 bool ACreature::CanMoveToGridSpace(FVector2D GridSpace)
 {
 	if (GameGrid != nullptr && GameGrid->IsGridSpaceFree(GridSpace))
@@ -51,6 +56,7 @@ bool ACreature::CanMoveToGridSpace(FVector2D GridSpace)
 
 void ACreature::MoveUp()
 {
+	PrevGridPos = GridPos;
 	FVector2D UpVec = FVector2D(0, -1);
 	if (CanMoveToGridSpace(GridPos + UpVec))
 	{
@@ -61,6 +67,7 @@ void ACreature::MoveUp()
 
 void ACreature::MoveDown()
 {
+	PrevGridPos = GridPos;
 	FVector2D DownVec = FVector2D(0, 1);
 	if (CanMoveToGridSpace(GridPos + DownVec))
 	{
@@ -71,6 +78,7 @@ void ACreature::MoveDown()
 
 void ACreature::MoveLeft()
 {
+	PrevGridPos = GridPos;
 	FVector2D LeftVec = FVector2D(-1, 0);
 	if (CanMoveToGridSpace(GridPos + LeftVec))
 	{
@@ -81,6 +89,7 @@ void ACreature::MoveLeft()
 
 void ACreature::MoveRight()
 {
+	PrevGridPos = GridPos;
 	FVector2D RightVec = FVector2D(1, 0);
 	if (CanMoveToGridSpace(GridPos + RightVec))
 	{
