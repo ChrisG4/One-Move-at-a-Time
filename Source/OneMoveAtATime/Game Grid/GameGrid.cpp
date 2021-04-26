@@ -33,6 +33,8 @@ void AGameGrid::SpawnGridBoxes()
 		{
 			AGridBox* NewBox = GetWorld()->SpawnActor<AGridBox>(GridBoxType, GridBoxPositions[i] + GetActorLocation(), FRotator(0, 0, 0));
 			GridBoxes.Add(NewBox->GetGridCoord(), NewBox);
+
+			GridCoords.Add(NewBox->GetGridCoord());
 		}
 	}
 }

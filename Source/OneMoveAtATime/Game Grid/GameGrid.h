@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 
 #include "GridBox.h"
+#include "..\Creatures/Pathfinding.h"
 #include "GameGrid.generated.h"
 
 UCLASS()
@@ -29,6 +30,8 @@ protected:
 
 	UPROPERTY()
 		TMap<FVector2D, AGridBox*> GridBoxes;
+
+	TArray<FVector2D> GridCoords;
 
 public:	
 	// Called every frame
