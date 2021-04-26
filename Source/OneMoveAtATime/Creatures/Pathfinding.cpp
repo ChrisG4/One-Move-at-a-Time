@@ -22,7 +22,7 @@ TArray<FIntArray> Pathfinding::CreateAdjacencyMatrix(TArray<FVector2D> GridBoxes
 		for (int j{ 0 }; j < GridBoxes.Num(); j++)
 		{
 
-			if (AreBoxesTouching(GridBoxes[i], GridBoxes[j]))
+			if (AreBoxesTouching(GridBoxes, GridBoxes[i], GridBoxes[j]))
 			{
 				AdjRow.IntArray.Push(1);
 			}
@@ -38,12 +38,20 @@ TArray<FIntArray> Pathfinding::CreateAdjacencyMatrix(TArray<FVector2D> GridBoxes
 	return AdjacencnyMatrix;
 }
 
-bool Pathfinding::AreBoxesTouching(FVector2D Coord1, FVector2D Coord2)
+bool Pathfinding::AreBoxesTouching(TArray<FVector2D> Coords, FVector2D Coord1, FVector2D Coord2)
 {
-	//VERTICAL AND HORIZONTAL
+	FVector2D TraversalVector = Coord2 - Coord1;
+
 	if (
+		//VERTICAL AND HORIZONTAL
 		Coord1.X == Coord2.X && FMath::Abs(Coord1.Y - Coord2.Y) == 1 ||
-		Coord1.Y == Coord2.Y && FMath::Abs(Coord1.X - Coord2.X) == 1
+		Coord1.Y == Coord2.Y && FMath::Abs(Coord1.X - Coord2.X) == 1 ||
+		//DIAGONAL
+		(
+			FMath::Abs(Coord1.X - Coord2.X) == 1 && FMath::Abs(Coord1.Y - Coord2.Y) == 1
+			&& (Coords.Contains(FVector2D(Coord1.X + TraversalVector.X, Coord1.Y))) &&
+			(Coords.Contains(FVector2D(Coord1.X, Coord1.Y + TraversalVector.Y)))
+		)
 		)
 	{
 		return true;
@@ -54,26 +62,28 @@ bool Pathfinding::AreBoxesTouching(FVector2D Coord1, FVector2D Coord2)
 
 TArray<FIntArray> Pathfinding::GetShortestPaths(TArray<FIntArray> AdjacencyMatrix, int32 StartSpace, int32 EndSpace)
 {
+	//CONTAINERS
 	TArray<FIntArray> PossiblePaths;
 	TArray<FIntArray> NewPaths;
 	TArray<FIntArray> FinalPaths;
 	TArray<int32> VisitedSpaces;
 	TArray<int32> NewlyVisitedSpaces;
 
+	//INITIALISE POSSIBLE PATHS
 	FIntArray StartSpaceArray;
 	StartSpaceArray.IntArray.Push(StartSpace);
 	PossiblePaths.Push(StartSpaceArray);
 
+	//CHECK IF SHOULD STAY STILL
 	if (StartSpace == EndSpace)
 	{
 		FIntArray StayStill;
-		StayStill.IntArray.Push(StartSpace);
-		StayStill.IntArray.Push(StartSpace);
+		StayStill.IntArray = TArray<int32>{ 0, StartSpace };
 		FinalPaths.Push(StayStill);
 		goto StayStill;
 	}
 
-
+	//FIND SHORTEST PATH
 	do
 	{
 		for (int i{ 0 }; i < PossiblePaths.Num(); i++)
@@ -102,13 +112,15 @@ TArray<FIntArray> Pathfinding::GetShortestPaths(TArray<FIntArray> AdjacencyMatri
 				}
 			}
 		}
-		//UPDATE POSSIBLE PATHS
+
+		//UPDATE CURRENT PATHS AND GRID SPACES
 		PossiblePaths = NewPaths;
-		//UPDATE VISITED NODES
+		NewPaths.Empty();
 		for (int i{ 0 }; i < NewlyVisitedSpaces.Num(); i++)
 		{
 			VisitedSpaces.Push(NewlyVisitedSpaces[i]);
 		}
+		NewlyVisitedSpaces.Empty();
 
 
 	} while (FinalPaths.Num() == 0);

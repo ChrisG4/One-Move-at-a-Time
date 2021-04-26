@@ -30,9 +30,7 @@ protected:
 
 	UPROPERTY()
 	TMap<FVector2D, AGridBox*> GridBoxes;
-
 	TMap<FVector2D, int32> GridIndexes;
-
 	TArray<FVector2D> GridCoords;
 
 	TArray<FIntArray> AdjacencyMatrix;
