@@ -23,15 +23,19 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditDefaultsOnly)
-		TSubclassOf<AGridBox> GridBoxType;
+	TSubclassOf<AGridBox> GridBoxType;
 
 	UPROPERTY(EditAnywhere, meta = (MakeEditWidget = "true"))
-		TArray<FVector> GridBoxPositions;
+	TArray<FVector> GridBoxPositions;
 
 	UPROPERTY()
-		TMap<FVector2D, AGridBox*> GridBoxes;
+	TMap<FVector2D, AGridBox*> GridBoxes;
+
+	TMap<FVector2D, int32> GridIndexes;
 
 	TArray<FVector2D> GridCoords;
+
+	TArray<FIntArray> AdjacencyMatrix;
 
 public:	
 	// Called every frame
@@ -40,5 +44,10 @@ public:
 	void SpawnGridBoxes();
 
 	bool IsGridSpaceFree(FVector2D GridCoord);
+
+	TArray<FIntArray>* GetAdjacencyMatrix();
+
+	FVector2D GetGridCoords(int32 GridIndex);
+	int32 GetGridIndex(FVector2D GridCoord);
 
 };

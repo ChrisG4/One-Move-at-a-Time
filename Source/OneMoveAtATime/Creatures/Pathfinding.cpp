@@ -64,6 +64,16 @@ TArray<FIntArray> Pathfinding::GetShortestPaths(TArray<FIntArray> AdjacencyMatri
 	StartSpaceArray.IntArray.Push(StartSpace);
 	PossiblePaths.Push(StartSpaceArray);
 
+	if (StartSpace == EndSpace)
+	{
+		FIntArray StayStill;
+		StayStill.IntArray.Push(StartSpace);
+		StayStill.IntArray.Push(StartSpace);
+		FinalPaths.Push(StayStill);
+		goto StayStill;
+	}
+
+
 	do
 	{
 		for (int i{ 0 }; i < PossiblePaths.Num(); i++)
@@ -102,6 +112,8 @@ TArray<FIntArray> Pathfinding::GetShortestPaths(TArray<FIntArray> AdjacencyMatri
 
 
 	} while (FinalPaths.Num() == 0);
+
+StayStill:;
 
 	return FinalPaths;
 }

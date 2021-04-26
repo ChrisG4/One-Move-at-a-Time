@@ -16,7 +16,8 @@ void ACreature::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	GridPos = FVector2D(GetActorLocation().X/MoveSpeed, GetActorLocation().Y/MoveSpeed);
+	PrevGridPos = FVector2D(GetActorLocation().X / MoveSpeed, GetActorLocation().Y / MoveSpeed);
+	GridPos = PrevGridPos;
 }
 
 // Called every frame

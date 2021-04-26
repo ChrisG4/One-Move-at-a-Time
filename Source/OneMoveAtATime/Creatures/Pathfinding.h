@@ -20,10 +20,10 @@ public:
 	Pathfinding();
 	~Pathfinding();
 
-	TArray<FIntArray> CreateAdjacencyMatrix(TArray<FVector2D> GridBoxes);
-	bool AreBoxesTouching(FVector2D Coord1, FVector2D Coord2);
+	static TArray<FIntArray> CreateAdjacencyMatrix(TArray<FVector2D> GridBoxes);
+	static bool AreBoxesTouching(FVector2D Coord1, FVector2D Coord2);
 
-	TArray<FIntArray> GetShortestPaths(TArray<FIntArray> AdjacencyMatrix, int32 StartNode, int32 EndNode);
+	static TArray<FIntArray> GetShortestPaths(TArray<FIntArray> AdjacencyMatrix, int32 StartNode, int32 EndNode);
 
 };
 

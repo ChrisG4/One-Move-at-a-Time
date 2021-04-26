@@ -17,6 +17,8 @@ void AGameGrid::BeginPlay()
 	Super::BeginPlay();
 	
 	SpawnGridBoxes();
+
+	AdjacencyMatrix = Pathfinding::CreateAdjacencyMatrix(GridCoords);
 }
 
 // Called every frame
@@ -32,8 +34,9 @@ void AGameGrid::SpawnGridBoxes()
 		for (int i{ 0 }; i < GridBoxPositions.Num(); i++)
 		{
 			AGridBox* NewBox = GetWorld()->SpawnActor<AGridBox>(GridBoxType, GridBoxPositions[i] + GetActorLocation(), FRotator(0, 0, 0));
-			GridBoxes.Add(NewBox->GetGridCoord(), NewBox);
 
+			GridBoxes.Add(NewBox->GetGridCoord(), NewBox);
+			GridIndexes.Add(NewBox->GetGridCoord(), i);
 			GridCoords.Add(NewBox->GetGridCoord());
 		}
 	}
@@ -51,3 +54,24 @@ bool AGameGrid::IsGridSpaceFree(FVector2D GridCoord)
 	}
 }
 
+TArray<FIntArray>* AGameGrid::GetAdjacencyMatrix()
+{
+	return &AdjacencyMatrix;
+}
+
+int32 AGameGrid::GetGridIndex(FVector2D GridCoord)
+{
+	if (GridIndexes.Contains(GridCoord))
+	{
+		return GridIndexes[GridCoord];
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+FVector2D AGameGrid::GetGridCoords(int32 GridIndex)
+{
+	return GridCoords[GridIndex];
+}
