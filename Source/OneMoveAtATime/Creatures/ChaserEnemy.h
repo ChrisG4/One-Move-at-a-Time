@@ -35,7 +35,7 @@ protected:
 public:
 
 	void OnPlayerMove() override;
-	void SetGridValues();
+	void FindPlayer();
 
 	void FindPossibleMoves();
 	void SelectNextMove();

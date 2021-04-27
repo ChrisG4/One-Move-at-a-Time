@@ -9,25 +9,19 @@ void AChaserEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 
-	SetGridValues();
+	
 }
 
 void AChaserEnemy::OnPlayerMove()
 {
-	SetGridValues();
+	FindPlayer();
 	FindPossibleMoves();
 	SelectNextMove();
 	Move();
-	SetGridValues();
 }
 
-void AChaserEnemy::SetGridValues()
+void AChaserEnemy::FindPlayer()
 {
-	PrevGridPos = GridPos;
-
-	GridPos = FVector2D(GetActorLocation().X / 100, GetActorLocation().Y / 100);
-	CurrentGridIndex = GameGrid->GetGridIndex(GridPos);
-
 	TargetGridCoord = PlayerCharacter->GetGridPos();
 	TargetGridIndex = GameGrid->GetGridIndex(TargetGridCoord);
 }
@@ -72,6 +66,9 @@ void  AChaserEnemy::SelectNextMove()
 
 void AChaserEnemy::Move()
 {
+	PrevGridPos = GridPos;
 	SetActorLocation(FVector((NextMoveGridCoord * MoveSpeed), GetActorLocation().Z));
+	GridPos = FVector2D(GetActorLocation().X / 100, GetActorLocation().Y / 100);
+	CurrentGridIndex = GameGrid->GetGridIndex(GridPos);
 }
  
