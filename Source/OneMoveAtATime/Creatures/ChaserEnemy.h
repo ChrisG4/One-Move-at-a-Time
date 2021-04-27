@@ -17,10 +17,27 @@ class ONEMOVEATATIME_API AChaserEnemy : public AEnemy
 	
 protected:
 
+	void BeginPlay() override;
+
 	UPROPERTY(BlueprintReadWrite)
 	APlayerCharacter* PlayerCharacter;
+
+	int32 CurrentGridIndex;
+
+	FVector2D TargetGridCoord;
+	int32 TargetGridIndex;
+
+	FVector2D NextMoveGridCoord;
+	int32 NextMoveGridIndex;
+
+	TArray<FVector2D> PossibleMoves;
 
 public:
 
 	void OnPlayerMove() override;
+	void SetGridValues();
+
+	void FindPossibleMoves();
+	void SelectNextMove();
+	void Move();
 };

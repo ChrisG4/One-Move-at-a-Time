@@ -3,21 +3,75 @@
 
 #include "ChaserEnemy.h"
 #include "Pathfinding.h"
+#include "..\OMAATGameInstance.h"
+
+void AChaserEnemy::BeginPlay()
+{
+	Super::BeginPlay();
+
+	SetGridValues();
+}
 
 void AChaserEnemy::OnPlayerMove()
 {
+	SetGridValues();
+	FindPossibleMoves();
+	SelectNextMove();
+	Move();
+	SetGridValues();
+}
+
+void AChaserEnemy::SetGridValues()
+{
 	PrevGridPos = GridPos;
-	
-	int32 CurrentGridIndex = GameGrid->GetGridIndex(this->GridPos);
-	int32 TargetGridIndex = GameGrid->GetGridIndex(PlayerCharacter->GetGridPos());
+
+	GridPos = FVector2D(GetActorLocation().X / 100, GetActorLocation().Y / 100);
+	CurrentGridIndex = GameGrid->GetGridIndex(GridPos);
+
+	TargetGridCoord = PlayerCharacter->GetGridPos();
+	TargetGridIndex = GameGrid->GetGridIndex(TargetGridCoord);
+}
+
+void AChaserEnemy::FindPossibleMoves()
+{
+	CurrentGridIndex = GameGrid->GetGridIndex(this->GridPos);
+	TargetGridIndex = GameGrid->GetGridIndex(PlayerCharacter->GetGridPos());
 
 	TArray<FIntArray> ShortestPaths = Pathfinding::GetShortestPaths(*GameGrid->GetAdjacencyMatrix(), CurrentGridIndex, TargetGridIndex);
 
-	int32 NextGridIndex = ShortestPaths[0].IntArray[1];
+	TArray<FVector2D> NextGridCoords;
 
-	FVector2D GridSpaceToMoveTo = GameGrid->GetGridCoords(NextGridIndex);
+	for (int i{ 0 }; i < ShortestPaths.Num(); i++)
+	{
+		NextGridCoords.Push(GameGrid->GetGridCoords(ShortestPaths[i].IntArray[1]));
+	}
 
-	SetActorLocation(FVector(GridSpaceToMoveTo * 100, 0));
-	GridPos = FVector2D(GetActorLocation().X / 100, GetActorLocation().Y / 100);
-
+	PossibleMoves = NextGridCoords;
 }
+
+void  AChaserEnemy::SelectNextMove()
+{
+	FVector2D OptimalChoice = PossibleMoves[0];
+	int32 CurrentMinimum = FMath::Abs(TargetGridCoord.X - OptimalChoice.X) + FMath::Abs(TargetGridCoord.Y - OptimalChoice.Y);
+
+	if (PossibleMoves.Num() > 1)
+	{
+		for (int i{ 1 }; i < PossibleMoves.Num(); i++)
+		{
+			int32 DistanceFromTarget = FMath::Abs(TargetGridCoord.X - PossibleMoves[i].X) + FMath::Abs(TargetGridCoord.Y - PossibleMoves[i].Y);
+			if (DistanceFromTarget < CurrentMinimum)
+			{
+				OptimalChoice = PossibleMoves[i];
+				CurrentMinimum = DistanceFromTarget;
+			}
+		}
+	}
+
+	NextMoveGridCoord = OptimalChoice;
+}
+
+void AChaserEnemy::Move()
+{
+	SetActorLocation(FVector((NextMoveGridCoord * MoveSpeed), GetActorLocation().Z));
+}
+ 
