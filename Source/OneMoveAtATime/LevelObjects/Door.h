@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "..\Game Grid\GridBox.h"
 #include "Door.generated.h"
 
 UCLASS()
@@ -19,8 +20,20 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	//ASSIGNED IN BLUEPRINTS
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+		AGridBox* GridBox1;
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+		AGridBox* GridBox2;
+	
+	UPROPERTY(VisibleAnywhere)
+	bool bIsActive = true;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	TArray<FVector2D> GetGridBoxCoords();
+
+	bool GetIsActive();
 };

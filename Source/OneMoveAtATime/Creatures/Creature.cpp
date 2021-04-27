@@ -45,7 +45,8 @@ FVector2D ACreature::GetPrevGridPos()
 
 bool ACreature::CanMoveToGridSpace(FVector2D GridSpace)
 {
-	if (GameGrid != nullptr && GameGrid->IsGridSpaceFree(GridSpace))
+	if (GameGrid != nullptr && GameGrid->IsGridSpaceFree(GridSpace)
+		&& !GameGrid->IsGridPathBlocked(GridPos, GridSpace))
 	{
 		return true;
 	}

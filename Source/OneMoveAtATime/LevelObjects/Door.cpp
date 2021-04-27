@@ -25,3 +25,18 @@ void ADoor::Tick(float DeltaTime)
 
 }
 
+TArray<FVector2D> ADoor::GetGridBoxCoords()
+{
+	TArray<FVector2D> GridBoxCoords;
+	if (GridBox1 != nullptr && GridBox2 != nullptr) {
+		GridBoxCoords.Push(GridBox1->GetGridCoord());
+		GridBoxCoords.Push(GridBox2->GetGridCoord());
+	}
+
+	return GridBoxCoords;
+}
+
+bool ADoor::GetIsActive()
+{
+	return this->bIsActive;
+}

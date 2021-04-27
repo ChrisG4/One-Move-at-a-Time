@@ -53,6 +53,23 @@ bool AGameGrid::IsGridSpaceFree(FVector2D GridCoord)
 	}
 }
 
+bool AGameGrid::IsGridPathBlocked(FVector2D Coord1, FVector2D Coord2)
+{
+	TArray<FVector2D> CoordsToCheck1{ Coord1, Coord2 };
+	TArray<FVector2D> CoordsToCheck2{ Coord2, Coord1 };
+
+	for (int i{ 0 }; i < Doors.Num(); i++)
+	{
+		if (Doors[i]->GetIsActive()
+			&& (CoordsToCheck1 == Doors[i]->GetGridBoxCoords() || CoordsToCheck2 == Doors[i]->GetGridBoxCoords()))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 TArray<FIntArray>* AGameGrid::GetAdjacencyMatrix()
 {
 	return &AdjacencyMatrix;
