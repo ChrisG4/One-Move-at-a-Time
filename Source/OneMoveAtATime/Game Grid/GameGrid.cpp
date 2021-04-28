@@ -17,8 +17,6 @@ void AGameGrid::BeginPlay()
 	Super::BeginPlay();
 	
 	SpawnGridBoxes();
-
-	AdjacencyMatrix = Pathfinding::CreateAdjacencyMatrix(GridCoords);
 }
 
 // Called every frame
@@ -68,6 +66,37 @@ bool AGameGrid::IsGridPathBlocked(FVector2D Coord1, FVector2D Coord2)
 	}
 
 	return false;
+}
+
+void AGameGrid::CreateAdjacencyMatrix()
+{
+	AdjacencyMatrix = Pathfinding::CreateAdjacencyMatrix(GridCoords);
+	UpdateAdjacenyMatrix();
+}
+
+void AGameGrid::UpdateAdjacenyMatrix()
+{
+	if (Doors.Num() > 0) {
+		for (int i{ 0 }; i < Doors.Num(); i++)
+		{
+			if (Doors[i]->GetGridBoxCoords().Num() > 0) {
+				TArray<FVector2D> Coords = Doors[i]->GetGridBoxCoords();
+				int32 Coord1Index = GetGridIndex(Coords[0]);
+				int32 Coord2Index = GetGridIndex(Coords[1]);
+
+				if (Doors[i]->GetIsActive())
+				{
+					AdjacencyMatrix[Coord1Index].IntArray[Coord2Index] = 0;
+					AdjacencyMatrix[Coord2Index].IntArray[Coord1Index] = 0;
+				}
+				else
+				{
+					AdjacencyMatrix[Coord1Index].IntArray[Coord2Index] = 1;
+					AdjacencyMatrix[Coord2Index].IntArray[Coord1Index] = 1;
+				}
+			}
+		}
+	}
 }
 
 TArray<FIntArray>* AGameGrid::GetAdjacencyMatrix()

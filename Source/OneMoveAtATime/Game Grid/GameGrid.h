@@ -48,6 +48,9 @@ public:
 	bool IsGridSpaceFree(FVector2D GridCoord);
 	bool IsGridPathBlocked(FVector2D Coord1, FVector2D Coor2);
 
+	UFUNCTION(BlueprintCallable)
+	void CreateAdjacencyMatrix();
+	void UpdateAdjacenyMatrix();
 	TArray<FIntArray>* GetAdjacencyMatrix();
 
 	FVector2D GetGridCoords(int32 GridIndex);

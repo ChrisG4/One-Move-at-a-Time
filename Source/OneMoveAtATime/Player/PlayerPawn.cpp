@@ -81,6 +81,8 @@ void APlayerPawn::MoveEnemies()
 	{
 		Enemies[i]->OnPlayerMove();
 	}
+
+	MainPlayer->GetGameGrid()->UpdateAdjacenyMatrix();
 }
 
 bool APlayerPawn::DidPlayerDie()

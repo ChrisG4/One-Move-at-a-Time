@@ -33,6 +33,16 @@ void ACreature::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+AGameGrid* ACreature::GetGameGrid()
+{
+	if (GameGrid != nullptr)
+	{
+		return GameGrid;
+	}
+
+	else return nullptr;
+}
+
 FVector2D ACreature::GetGridPos()
 {
 	return GridPos;

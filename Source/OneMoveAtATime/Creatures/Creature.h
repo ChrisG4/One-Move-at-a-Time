@@ -40,6 +40,8 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	//GET CREATURE INFO
+	AGameGrid* GetGameGrid();
+
 	FVector2D GetGridPos();
 	FVector2D GetPrevGridPos();
 	

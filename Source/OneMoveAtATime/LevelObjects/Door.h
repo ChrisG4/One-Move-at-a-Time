@@ -34,6 +34,5 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	TArray<FVector2D> GetGridBoxCoords();
-
 	bool GetIsActive();
 };
