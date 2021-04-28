@@ -15,25 +15,25 @@ void APatrolEnemy::UpdateMoveDirection()
 	switch (CurrentMoveDirection)
 	{
 	case Up:
-		if (!GameGrid->IsGridSpaceFree(GridPos + FVector2D(0, -1)))
+		if (!CanMoveToGridSpace(GridPos + FVector2D(0, -1)))
 		{
 			CurrentMoveDirection = Down;
 		}
 		break;
 	case Down:
-		if (!GameGrid->IsGridSpaceFree(GridPos + FVector2D(0, 1)))
+		if (!CanMoveToGridSpace(GridPos + FVector2D(0, 1)))
 		{
 			CurrentMoveDirection = Up;
 		}
 		break;
 	case Left:
-		if (!GameGrid->IsGridSpaceFree(GridPos + FVector2D(-1, 0)))
+		if (!CanMoveToGridSpace(GridPos + FVector2D(-1, 0)))
 		{
 			CurrentMoveDirection = Right;
 		}
 		break;
 	case Right:
-		if (!GameGrid->IsGridSpaceFree(GridPos + FVector2D(1, 0)))
+		if (!CanMoveToGridSpace(GridPos + FVector2D(1, 0)))
 		{
 			CurrentMoveDirection = Left;
 		}
