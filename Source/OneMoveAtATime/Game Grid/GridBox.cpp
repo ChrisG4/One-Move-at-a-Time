@@ -53,3 +53,13 @@ FVector2D AGridBox::GetGridCoord()
 {
 	return this->GridCoord;
 }
+
+void AGridBox::SetIsBoxBlocked(bool IsGridBoxBlocked)
+{
+	this->bIsBoxBlocked = IsGridBoxBlocked;
+}
+
+bool AGridBox::IsBoxBlocked()
+{
+	return bIsBoxBlocked;
+}

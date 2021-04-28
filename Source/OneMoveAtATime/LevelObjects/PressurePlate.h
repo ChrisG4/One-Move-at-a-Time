@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "LevelObject.h"
 #include "GameFramework/Actor.h"
 #include "PressurePlate.generated.h"
 

@@ -41,14 +41,12 @@ void AGameGrid::SpawnGridBoxes()
 
 bool AGameGrid::IsGridSpaceFree(FVector2D GridCoord)
 {
-	if (GridBoxes.Contains(GridCoord))
+	if (GridBoxes.Contains(GridCoord) && !GridBoxes[GridCoord]->IsBoxBlocked())
 	{
 		return true;
 	}
-	else
-	{
-		return false;
-	}
+
+	return false;
 }
 
 bool AGameGrid::IsGridPathBlocked(FVector2D Coord1, FVector2D Coord2)

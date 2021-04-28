@@ -24,6 +24,8 @@ protected:
 
 	const int32 BoxSize = UOMAATGameInstance::GridBoxSize;
 
+	bool bIsBoxBlocked = false;
+
 public:
 	AGridBox();
 
@@ -31,4 +33,7 @@ public:
 	void SetGridCoord();
 
 	FVector2D GetGridCoord();
+
+	void SetIsBoxBlocked(bool IsBoxBlocked);
+	bool IsBoxBlocked();
 };

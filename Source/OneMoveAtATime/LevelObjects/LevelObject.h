@@ -3,18 +3,18 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "LevelObject.h"
 #include "GameFramework/Actor.h"
-#include "Crate.generated.h"
+#include "..\Game Grid/GameGrid.h"
+#include "LevelObject.generated.h"
 
 UCLASS()
-class ONEMOVEATATIME_API ACrate : public AActor
+class ONEMOVEATATIME_API ALevelObject : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ACrate();
+	ALevelObject();
 
 protected:
 	// Called when the game starts or when spawned
