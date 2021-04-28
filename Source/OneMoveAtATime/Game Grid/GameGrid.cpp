@@ -31,7 +31,10 @@ void AGameGrid::SpawnGridBoxes()
 	if (GridBoxType != nullptr && GridBoxPositions.Num() > 0) {
 		for (int i{ 0 }; i < GridBoxPositions.Num(); i++)
 		{
-			AGridBox* NewBox = GetWorld()->SpawnActor<AGridBox>(GridBoxType, GridBoxPositions[i] + GetActorLocation(), FRotator(0, 0, 0));
+			FActorSpawnParameters Params;
+			Params.Owner = this;
+			
+			AGridBox* NewBox = GetWorld()->SpawnActor<AGridBox>(GridBoxType, GridBoxPositions[i] + GetActorLocation(), FRotator(0, 0, 0), Params);
 			GridBoxes.Add(NewBox->GetGridCoord(), NewBox);
 			GridIndexes.Add(NewBox->GetGridCoord(), i);
 			GridCoords.Add(NewBox->GetGridCoord());
@@ -92,6 +95,18 @@ void AGameGrid::UpdateAdjacenyMatrix()
 					AdjacencyMatrix[Coord1Index].IntArray[Coord2Index] = 1;
 					AdjacencyMatrix[Coord2Index].IntArray[Coord1Index] = 1;
 				}
+			}
+		}
+	}
+
+	for (int i{ 0 }; i < GridBoxes.Num(); i++)
+	{
+		if (GridBoxes[GridCoords[i]]->IsBoxBlocked())
+		{
+			for (int j{ 0 }; j < AdjacencyMatrix.Num(); j++)
+			{
+				AdjacencyMatrix[i].IntArray[j] = 0;
+				AdjacencyMatrix[j].IntArray[i] = 0;
 			}
 		}
 	}

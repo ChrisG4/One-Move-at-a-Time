@@ -24,6 +24,7 @@ protected:
 
 	const int32 BoxSize = UOMAATGameInstance::GridBoxSize;
 
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	bool bIsBoxBlocked = false;
 
 public:
@@ -36,4 +37,7 @@ public:
 
 	void SetIsBoxBlocked(bool IsBoxBlocked);
 	bool IsBoxBlocked();
+
+	void OnBeingBlocked();
+	void OnBeingUnblocked();
 };

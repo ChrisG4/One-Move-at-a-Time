@@ -63,3 +63,13 @@ bool AGridBox::IsBoxBlocked()
 {
 	return bIsBoxBlocked;
 }
+
+void AGridBox::OnBeingBlocked()
+{
+	
+}
+
+void AGridBox::OnBeingUnblocked()
+{
+
+}
