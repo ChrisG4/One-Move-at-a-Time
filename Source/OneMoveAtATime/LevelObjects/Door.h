@@ -4,11 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "LevelObject.h"
 #include "..\Game Grid\GridBox.h"
 #include "Door.generated.h"
 
 UCLASS()
-class ONEMOVEATATIME_API ADoor : public AActor
+class ONEMOVEATATIME_API ADoor : public ALevelObject
 {
 	GENERATED_BODY()
 	

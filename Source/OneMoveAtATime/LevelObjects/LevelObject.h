@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "..\Game Grid/GameGrid.h"
 #include "LevelObject.generated.h"
 
 UCLASS()

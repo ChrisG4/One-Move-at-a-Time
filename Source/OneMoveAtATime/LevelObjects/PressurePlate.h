@@ -8,7 +8,7 @@
 #include "PressurePlate.generated.h"
 
 UCLASS()
-class ONEMOVEATATIME_API APressurePlate : public AActor
+class ONEMOVEATATIME_API APressurePlate : public ALevelObject
 {
 	GENERATED_BODY()
 	

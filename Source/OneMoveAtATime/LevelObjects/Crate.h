@@ -8,7 +8,7 @@
 #include "Crate.generated.h"
 
 UCLASS()
-class ONEMOVEATATIME_API ACrate : public AActor
+class ONEMOVEATATIME_API ACrate : public ALevelObject
 {
 	GENERATED_BODY()
 	
