@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "GridBox.h"
 #include "DrawDebugHelpers.h"
-
+#include "GameGrid.h"
 #include "..\OMAATGameInstance.h"
 
 AGridBox::AGridBox()
@@ -64,6 +64,11 @@ bool AGridBox::IsBoxBlocked()
 	return bIsBoxBlocked;
 }
 
+void AGridBox::UpdateGameGridAdjacency()
+{
+	AGameGrid* GameGrid = Cast<AGameGrid>(this->GetOwner());
+}
+
 void AGridBox::OnBeingBlocked()
 {
 	
@@ -71,5 +76,5 @@ void AGridBox::OnBeingBlocked()
 
 void AGridBox::OnBeingUnblocked()
 {
-
+	UpdateGameGridAdjacency();
 }

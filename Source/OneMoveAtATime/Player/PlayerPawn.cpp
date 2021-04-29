@@ -77,12 +77,12 @@ void APlayerPawn::PlayerMoveRight()
 
 void APlayerPawn::MoveEnemies()
 {
+	MainPlayer->GetGameGrid()->CreateAdjacencyMatrix();
+
 	for (int i{ 0 }; i < Enemies.Num(); i++)
 	{
 		Enemies[i]->OnPlayerMove();
 	}
-
-	MainPlayer->GetGameGrid()->UpdateAdjacenyMatrix();
 }
 
 bool APlayerPawn::DidPlayerDie()

@@ -38,6 +38,8 @@ public:
 	void SetIsBoxBlocked(bool IsBoxBlocked);
 	bool IsBoxBlocked();
 
+	void UpdateGameGridAdjacency();
+
 	void OnBeingBlocked();
 	void OnBeingUnblocked();
 };
