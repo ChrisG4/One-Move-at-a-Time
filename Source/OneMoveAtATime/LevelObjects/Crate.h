@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "LevelObject.h"
-#include "GameFramework/Actor.h"
 #include "Crate.generated.h"
 
 UCLASS()
@@ -20,8 +19,14 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UPROPERTY(VisibleAnywhere)
+	FVector2D GridCoord;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	FVector2D GetGridCoord();
+
+	void PushCrate(FVector2D Location);
 };

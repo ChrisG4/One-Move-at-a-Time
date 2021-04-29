@@ -20,8 +20,13 @@ protected:
 
 	void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
-
-
 public:
+
+	void MoveUp() override;
+	void MoveDown() override;
+	void MoveLeft() override;
+	void MoveRight() override;
+
+	void CheckForBox(FVector2D GridCoord);
 
 };

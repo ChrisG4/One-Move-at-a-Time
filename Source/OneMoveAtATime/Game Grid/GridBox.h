@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "Engine/TriggerBox.h"
 #include "..\OMAATGameInstance.h"
+#include "..\LevelObjects/Crate.h"
+
 #include "GridBox.generated.h"
 
 /**
@@ -27,6 +29,9 @@ protected:
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	bool bIsBoxBlocked = false;
 
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+		ACrate* OccupyingCrate;
+
 public:
 	AGridBox();
 
@@ -37,9 +42,6 @@ public:
 
 	void SetIsBoxBlocked(bool IsBoxBlocked);
 	bool IsBoxBlocked();
+	ACrate* GetOccupyingCrate();
 
-	void UpdateGameGridAdjacency();
-
-	void OnBeingBlocked();
-	void OnBeingUnblocked();
 };

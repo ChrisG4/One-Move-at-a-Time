@@ -46,9 +46,11 @@ public:
 	FVector2D GetPrevGridPos();
 	
 	//MOVEMENT CHECKS
-	bool CanMoveToGridSpace(FVector2D GridSpace);
+	virtual bool CanMoveToGridSpace(FVector2D GridSpace);
 
 	//MOVEMENT FUNCTIONS
+	virtual void MoveTo(FVector2D Coord);
+
 	virtual void MoveUp();
 	virtual void MoveDown();
 	virtual void MoveLeft();

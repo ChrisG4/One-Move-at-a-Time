@@ -66,6 +66,16 @@ bool ACreature::CanMoveToGridSpace(FVector2D GridSpace)
 	}
 }
 
+void ACreature::MoveTo(FVector2D Coord)
+{
+	PrevGridPos = GridPos;
+	if (CanMoveToGridSpace(Coord))
+	{
+		SetActorLocation(FVector(Coord.X * UOMAATGameInstance::GridBoxSize, Coord.Y * UOMAATGameInstance::GridBoxSize, GetActorLocation().Z));
+		GridPos = Coord;
+	}
+}
+
 void ACreature::MoveUp()
 {
 	PrevGridPos = GridPos;

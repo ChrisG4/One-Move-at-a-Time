@@ -2,6 +2,7 @@
 
 
 #include "Crate.h"
+#include "..\OMAATGameInstance.h"
 
 // Sets default values
 ACrate::ACrate()
@@ -16,6 +17,7 @@ void ACrate::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	GridCoord = FVector2D(GetActorLocation().X / UOMAATGameInstance::GridBoxSize, GetActorLocation().Y / UOMAATGameInstance::GridBoxSize);
 }
 
 // Called every frame
@@ -23,5 +25,17 @@ void ACrate::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+FVector2D ACrate::GetGridCoord()
+{
+	return this->GridCoord;
+}
+
+
+void ACrate::PushCrate(FVector2D Location)
+{
+	SetActorLocation(FVector(Location.X * UOMAATGameInstance::GridBoxSize, Location.Y * UOMAATGameInstance::GridBoxSize, GetActorLocation().Z));
+	GridCoord = FVector2D(GetActorLocation().X / UOMAATGameInstance::GridBoxSize, GetActorLocation().Y / UOMAATGameInstance::GridBoxSize);
 }
 

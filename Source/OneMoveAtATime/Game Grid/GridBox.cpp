@@ -64,17 +64,12 @@ bool AGridBox::IsBoxBlocked()
 	return bIsBoxBlocked;
 }
 
-void AGridBox::UpdateGameGridAdjacency()
+ACrate* AGridBox::GetOccupyingCrate()
 {
-	AGameGrid* GameGrid = Cast<AGameGrid>(this->GetOwner());
-}
+	if (OccupyingCrate != nullptr)
+	{
+		return  OccupyingCrate;
+	}
 
-void AGridBox::OnBeingBlocked()
-{
-	
-}
-
-void AGridBox::OnBeingUnblocked()
-{
-	UpdateGameGridAdjacency();
+	return nullptr;
 }

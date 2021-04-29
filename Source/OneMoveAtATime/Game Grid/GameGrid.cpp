@@ -117,6 +117,16 @@ TArray<FIntArray>* AGameGrid::GetAdjacencyMatrix()
 	return &AdjacencyMatrix;
 }
 
+AGridBox* AGameGrid::GetGridBox(FVector2D GridCoord)
+{
+	if (GridBoxes.Contains(GridCoord))
+	{
+		return GridBoxes[GridCoord];
+	}
+
+	return nullptr;
+}
+
 int32 AGameGrid::GetGridIndex(FVector2D GridCoord)
 {
 	if (GridIndexes.Contains(GridCoord))

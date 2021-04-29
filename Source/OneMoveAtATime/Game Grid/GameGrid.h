@@ -8,6 +8,7 @@
 #include "GridBox.h"
 #include "..\Creatures/Pathfinding.h"
 #include "..\LevelObjects/Door.h"
+#include "..\LevelObjects/Crate.h"
 #include "GameGrid.generated.h"
 
 UCLASS()
@@ -39,6 +40,9 @@ protected:
 	UPROPERTY(BlueprintReadWrite)
 	TArray<ADoor*> Doors;
 
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	TArray<ACrate*> Crates;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -53,6 +57,7 @@ public:
 	void UpdateAdjacenyMatrix();
 	TArray<FIntArray>* GetAdjacencyMatrix();
 
+	AGridBox* GetGridBox(FVector2D GridCoord);
 	FVector2D GetGridCoords(int32 GridIndex);
 	int32 GetGridIndex(FVector2D GridCoord);
 
