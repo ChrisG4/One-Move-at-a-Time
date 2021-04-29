@@ -85,7 +85,7 @@ TArray<FIntArray> Pathfinding::GetShortestPaths(TArray<FIntArray> AdjacencyMatri
 
 	//FIND SHORTEST PATH
 	do
-	{
+	{		
 		for (int i{ 0 }; i < PossiblePaths.Num(); i++)
 		{
 			for (int j{ 0 }; j < AdjacencyMatrix.Num(); j++)
@@ -111,6 +111,15 @@ TArray<FIntArray> Pathfinding::GetShortestPaths(TArray<FIntArray> AdjacencyMatri
 					}
 				}
 			}
+		}
+
+
+		if (NewPaths.Num() == 0 && FinalPaths.Num() == 0)
+		{
+			FIntArray StayStill;
+			StayStill.IntArray = TArray<int32>{ 0, StartSpace };
+			FinalPaths.Push(StayStill);
+			goto StayStill;
 		}
 
 		//UPDATE CURRENT PATHS AND GRID SPACES
