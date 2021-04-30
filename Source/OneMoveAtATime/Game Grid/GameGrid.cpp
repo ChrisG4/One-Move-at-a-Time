@@ -44,7 +44,7 @@ void AGameGrid::SpawnGridBoxes()
 
 bool AGameGrid::IsGridSpaceFree(FVector2D GridCoord)
 {
-	if (GridBoxes.Contains(GridCoord) && !GridBoxes[GridCoord]->IsBoxBlocked())
+	if (GridBoxes.Contains(GridCoord) && !GridBoxes[GridCoord]->DoesContainCrate())
 	{
 		return true;
 	}
@@ -101,7 +101,7 @@ void AGameGrid::UpdateAdjacenyMatrix()
 
 	for (int i{ 0 }; i < GridBoxes.Num(); i++)
 	{
-		if (GridBoxes[GridCoords[i]]->IsBoxBlocked())
+		if (GridBoxes[GridCoords[i]]->DoesContainCrate())
 		{
 			for (int j{ 0 }; j < AdjacencyMatrix.Num(); j++)
 			{

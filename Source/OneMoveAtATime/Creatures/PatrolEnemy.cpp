@@ -43,9 +43,33 @@ void APatrolEnemy::UpdateMoveDirection()
 	}
 }
 
+void APatrolEnemy::CheckIfStuck()
+{
+	if (CurrentMoveDirection == Up || CurrentMoveDirection == Down)
+	{
+		if (!CanMoveToGridSpace(GridPos + FVector2D(0, -1)) && !CanMoveToGridSpace(GridPos + FVector2D(0, 1)))
+		{
+			bIsStuck = true;
+			return;
+		}
+	}
+	
+	if (CurrentMoveDirection == Left || CurrentMoveDirection == Right)
+	{
+		if (!CanMoveToGridSpace(GridPos + FVector2D(-1, 0)) && !CanMoveToGridSpace(GridPos + FVector2D(1, 0)))
+		{
+			bIsStuck = true;
+			return;
+		}
+	}
+
+	bIsStuck = false;
+}
+
 void APatrolEnemy::OnPlayerMove()
 {
 	UpdateMoveDirection();
+	CheckIfStuck();
 
 	switch (CurrentMoveDirection)
 	{

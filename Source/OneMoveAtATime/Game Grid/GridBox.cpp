@@ -54,14 +54,19 @@ FVector2D AGridBox::GetGridCoord()
 	return this->GridCoord;
 }
 
-void AGridBox::SetIsBoxBlocked(bool IsGridBoxBlocked)
+bool AGridBox::DoesContainEnemy()
 {
-	this->bIsBoxBlocked = IsGridBoxBlocked;
+	return this->bContainsEnemy;
 }
 
-bool AGridBox::IsBoxBlocked()
+void AGridBox::SetContainsCrate(bool DoesContainCrate)
 {
-	return bIsBoxBlocked;
+	this->bContainsCrate = DoesContainCrate;
+}
+
+bool AGridBox::DoesContainCrate()
+{
+	return bContainsCrate;
 }
 
 ACrate* AGridBox::GetOccupyingCrate()
@@ -69,6 +74,16 @@ ACrate* AGridBox::GetOccupyingCrate()
 	if (OccupyingCrate != nullptr)
 	{
 		return  OccupyingCrate;
+	}
+
+	return nullptr;
+}
+
+AActor* AGridBox::GetOccupyingEntity()
+{
+	if (OccupyingEntity != nullptr)
+	{
+		return OccupyingEntity;
 	}
 
 	return nullptr;

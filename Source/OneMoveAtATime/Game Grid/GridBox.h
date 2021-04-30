@@ -6,7 +6,6 @@
 #include "Engine/TriggerBox.h"
 #include "..\OMAATGameInstance.h"
 #include "..\LevelObjects/Crate.h"
-
 #include "GridBox.generated.h"
 
 /**
@@ -27,21 +26,31 @@ protected:
 	const int32 BoxSize = UOMAATGameInstance::GridBoxSize;
 
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	bool bIsBoxBlocked = false;
+	bool bContainsCrate = false;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+		bool bContainsEnemy = false;
 
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 		ACrate* OccupyingCrate;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+		AActor* OccupyingEntity;
 
 public:
 	AGridBox();
 
 	bool IsPlacementValid();
 	void SetGridCoord();
-
 	FVector2D GetGridCoord();
 
-	void SetIsBoxBlocked(bool IsBoxBlocked);
-	bool IsBoxBlocked();
-	ACrate* GetOccupyingCrate();
+	bool DoesContainEnemy();
 
+	void SetContainsCrate(bool DoesContainCrate);
+	bool DoesContainCrate();
+
+	UFUNCTION()
+	ACrate* GetOccupyingCrate();
+	UFUNCTION()
+	AActor* GetOccupyingEntity();
 };

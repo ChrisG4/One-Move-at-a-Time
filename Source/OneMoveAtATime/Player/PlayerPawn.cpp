@@ -40,6 +40,7 @@ void APlayerPawn::PlayerMove(FVector2D MovementVec)
 	if (MainPlayer != nullptr)
 	{
 		FVector2D TargetSpace = MainPlayer->GetGridPos() + MovementVec;
+
 		MainPlayer->CheckForBox(TargetSpace);
 
 		if (MainPlayer->CanMoveToGridSpace(TargetSpace))
@@ -54,54 +55,21 @@ void APlayerPawn::PlayerMove(FVector2D MovementVec)
 void APlayerPawn::PlayerMoveUp()
 {
 	PlayerMove(FVector2D(0, -1));
-	//if (MainPlayer != nullptr) {
-	//	FVector2D TargetSpace = MainPlayer->GetGridPos() + FVector2D(0, -1);
-	//	MainPlayer->CheckForBox(TargetSpace);
-
-	//		if (MainPlayer->CanMoveToGridSpace(MainPlayer->GetGridPos() + FVector2D(0, -1)))
-	//		{
-	//			MainPlayer->MoveUp();
-	//			MoveEnemies();
-	//			DidPlayerDie();
-	//		}
-	//}
 }
 
 void APlayerPawn::PlayerMoveDown()
 {
 	PlayerMove(FVector2D(0, 1));
-	//if (MainPlayer != nullptr /*&& MainPlayer->CanMoveToGridSpace(MainPlayer->GetGridPos() + FVector2D(0, 1))*/)
-	//{
-	//	FVector2D TargetSpace = MainPlayer->GetGridPos() + FVector2D(0, 1);
-	//	MainPlayer->CheckForBox(TargetSpace);
-
-	//	MainPlayer->MoveDown();
-	//	MoveEnemies();
-	//	DidPlayerDie();
-	//}
 }
 
 void APlayerPawn::PlayerMoveLeft()
 {
 	PlayerMove(FVector2D(-1, 0));
-	//if (MainPlayer != nullptr /*&& MainPlayer->CanMoveToGridSpace(MainPlayer->GetGridPos() + FVector2D(-1, 0))*/)
-	//{
-	//	MainPlayer->MoveLeft();
-	//	MoveEnemies();
-	//	DidPlayerDie();
-	//}
 }
 
 void APlayerPawn::PlayerMoveRight()
 {
-	
 	PlayerMove(FVector2D(1, 0));
-	//if (MainPlayer != nullptr /*&& MainPlayer->CanMoveToGridSpace(MainPlayer->GetGridPos() + FVector2D(1, 0))*/)
-	//{
-	//	MainPlayer->MoveRight();
-	//	MoveEnemies();
-	//	DidPlayerDie();
-	//}
 }
 
 void APlayerPawn::MoveEnemies()

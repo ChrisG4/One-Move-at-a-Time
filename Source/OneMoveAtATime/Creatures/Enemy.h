@@ -19,8 +19,13 @@ protected:
 
 	void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
+	UPROPERTY(VisibleAnywhere)
+		bool bIsStuck;
+
 public:
 
 	virtual void OnPlayerMove();
-	
+
+	UFUNCTION()
+	bool IsStuck();
 };
