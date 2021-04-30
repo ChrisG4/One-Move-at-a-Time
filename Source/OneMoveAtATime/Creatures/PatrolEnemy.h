@@ -39,7 +39,7 @@ public:
 	void OnPlayerMove() override;
 
 	UFUNCTION()
-	void CheckIfStuck();
+	void CheckIfStuck() override;
 	void UpdateMoveDirection();
 
 };

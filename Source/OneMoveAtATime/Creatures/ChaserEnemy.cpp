@@ -17,6 +17,7 @@ void AChaserEnemy::OnPlayerMove()
 	FindPlayer();
 	FindPossibleMoves();
 	SelectNextMove();
+	CheckIfStuck();
 	Move();
 }
 
@@ -70,5 +71,17 @@ void AChaserEnemy::Move()
 	SetActorLocation(FVector((NextMoveGridCoord * MoveSpeed), GetActorLocation().Z));
 	GridPos = FVector2D(GetActorLocation().X / 100, GetActorLocation().Y / 100);
 	CurrentGridIndex = GameGrid->GetGridIndex(GridPos);
+}
+
+void AChaserEnemy::CheckIfStuck()
+{
+	if (NextMoveGridCoord == GridPos)
+	{
+		bIsStuck = true;
+	}
+	else
+	{
+		bIsStuck = false;
+	}
 }
  

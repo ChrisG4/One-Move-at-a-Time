@@ -21,15 +21,17 @@ protected:
 
 	UPROPERTY(BlueprintReadWrite)
 	APlayerCharacter* PlayerCharacter;
-
+	UPROPERTY(VisibleAnywhere, Category = "Pathfinding")
 	int32 CurrentGridIndex;
-
+	UPROPERTY(VisibleAnywhere, Category = "Pathfinding")
 	FVector2D TargetGridCoord;
+	UPROPERTY(VisibleAnywhere, Category = "Pathfinding")
 	int32 TargetGridIndex;
-
+	UPROPERTY(VisibleAnywhere, Category = "Pathfinding")
 	FVector2D NextMoveGridCoord;
+	UPROPERTY(VisibleAnywhere, Category = "Pathfinding")
 	int32 NextMoveGridIndex;
-
+	UPROPERTY(VisibleAnywhere, Category = "Pathfinding")
 	TArray<FVector2D> PossibleMoves;
 
 public:
@@ -40,4 +42,6 @@ public:
 	void FindPossibleMoves();
 	void SelectNextMove();
 	void Move();
+
+	void CheckIfStuck() override;
 };

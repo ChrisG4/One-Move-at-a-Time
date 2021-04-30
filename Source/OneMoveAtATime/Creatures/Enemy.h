@@ -26,6 +26,7 @@ public:
 
 	virtual void OnPlayerMove();
 
+	virtual void CheckIfStuck();
 	UFUNCTION()
 	bool IsStuck();
 };

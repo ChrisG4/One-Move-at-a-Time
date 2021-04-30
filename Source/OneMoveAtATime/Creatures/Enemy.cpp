@@ -13,6 +13,11 @@ void AEnemy::OnPlayerMove()
 
 }
 
+void AEnemy::CheckIfStuck()
+{
+
+}
+
 bool AEnemy::IsStuck()
 {
 	return this->bIsStuck;
