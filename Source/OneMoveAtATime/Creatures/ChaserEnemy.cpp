@@ -24,7 +24,6 @@ void AChaserEnemy::OnPlayerMove()
 void AChaserEnemy::FindPlayer()
 {
 	TargetGridCoord = PlayerCharacter->GetGridPos();
-	TargetGridIndex = GameGrid->GetGridIndex(TargetGridCoord);
 }
 
 void AChaserEnemy::FindPossibleMoves()
@@ -38,7 +37,8 @@ void AChaserEnemy::FindPossibleMoves()
 
 	for (int i{ 0 }; i < ShortestPaths.Num(); i++)
 	{
-		NextGridCoords.Push(GameGrid->GetAvailableSpaces()[ShortestPaths[i].IntArray[1]]);
+		FVector2D NextGridCoord = GameGrid->GetAvailableSpaces()[ShortestPaths[i].IntArray[1]];
+		NextGridCoords.Push(NextGridCoord);
 	}
 
 	PossibleMoves = NextGridCoords;
@@ -70,7 +70,6 @@ void AChaserEnemy::Move()
 	PrevGridPos = GridPos;
 	SetActorLocation(FVector((NextMoveGridCoord * MoveSpeed), GetActorLocation().Z));
 	GridPos = FVector2D(GetActorLocation().X / 100, GetActorLocation().Y / 100);
-	CurrentGridIndex = GameGrid->GetGridIndex(GridPos);
 }
 
 void AChaserEnemy::CheckIfStuck()

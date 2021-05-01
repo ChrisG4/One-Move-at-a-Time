@@ -36,7 +36,6 @@ void AGameGrid::SpawnGridBoxes()
 			
 			AGridBox* NewBox = GetWorld()->SpawnActor<AGridBox>(GridBoxType, GridBoxPositions[i] + GetActorLocation(), FRotator(0, 0, 0), Params);
 			GridBoxes.Add(NewBox->GetGridCoord(), NewBox);
-			GridIndexes.Add(NewBox->GetGridCoord(), i);
 			GridCoords.Add(NewBox->GetGridCoord());
 		}
 	}
@@ -129,17 +128,6 @@ AGridBox* AGameGrid::GetGridBox(FVector2D GridCoord)
 	return nullptr;
 }
 
-int32 AGameGrid::GetGridIndex(FVector2D GridCoord)
-{
-	if (GridIndexes.Contains(GridCoord))
-	{
-		return GridIndexes[GridCoord];
-	}
-	else
-	{
-		return 0;
-	}
-}
 
 FVector2D AGameGrid::GetGridCoords(int32 GridIndex)
 {

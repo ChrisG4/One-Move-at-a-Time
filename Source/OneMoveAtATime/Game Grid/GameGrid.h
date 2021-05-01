@@ -32,7 +32,6 @@ protected:
 
 	UPROPERTY()
 	TMap<FVector2D, AGridBox*> GridBoxes;
-	TMap<FVector2D, int32> GridIndexes;
 	TArray<FVector2D> GridCoords;
 	TArray<FVector2D> AvailableSpaces;
 
@@ -62,6 +61,5 @@ public:
 
 	AGridBox* GetGridBox(FVector2D GridCoord);
 	FVector2D GetGridCoords(int32 GridIndex);
-	int32 GetGridIndex(FVector2D GridCoord);
 
 };
