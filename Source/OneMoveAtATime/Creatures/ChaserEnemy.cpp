@@ -29,8 +29,8 @@ void AChaserEnemy::FindPlayer()
 
 void AChaserEnemy::FindPossibleMoves()
 {
-	CurrentGridIndex = GameGrid->GetGridIndex(this->GridPos);
-	TargetGridIndex = GameGrid->GetGridIndex(PlayerCharacter->GetGridPos());
+	CurrentGridIndex = GameGrid->GetAvailableSpaces().Find(GridPos);
+	TargetGridIndex = GameGrid->GetAvailableSpaces().Find(PlayerCharacter->GetGridPos());
 
 	TArray<FIntArray> ShortestPaths = Pathfinding::GetShortestPaths(*GameGrid->GetAdjacencyMatrix(), CurrentGridIndex, TargetGridIndex);
 
@@ -38,7 +38,7 @@ void AChaserEnemy::FindPossibleMoves()
 
 	for (int i{ 0 }; i < ShortestPaths.Num(); i++)
 	{
-		NextGridCoords.Push(GameGrid->GetGridCoords(ShortestPaths[i].IntArray[1]));
+		NextGridCoords.Push(GameGrid->GetAvailableSpaces()[ShortestPaths[i].IntArray[1]]);
 	}
 
 	PossibleMoves = NextGridCoords;

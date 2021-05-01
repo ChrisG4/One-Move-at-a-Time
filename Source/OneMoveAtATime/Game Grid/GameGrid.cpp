@@ -71,7 +71,16 @@ bool AGameGrid::IsGridPathBlocked(FVector2D Coord1, FVector2D Coord2)
 
 void AGameGrid::CreateAdjacencyMatrix()
 {
-	AdjacencyMatrix = Pathfinding::CreateAdjacencyMatrix(GridCoords);
+	AvailableSpaces.Empty();
+	for (int i{ 0 }; i < GridCoords.Num(); i++)
+	{
+		if (!GridBoxes[GridCoords[i]]->DoesContainCrate())
+		{
+			AvailableSpaces.Push(GridCoords[i]);
+		}
+	}
+	
+	AdjacencyMatrix = Pathfinding::CreateAdjacencyMatrix(AvailableSpaces);
 	UpdateAdjacenyMatrix();
 }
 
@@ -82,8 +91,8 @@ void AGameGrid::UpdateAdjacenyMatrix()
 		{
 			if (Doors[i]->GetGridBoxCoords().Num() > 0) {
 				TArray<FVector2D> Coords = Doors[i]->GetGridBoxCoords();
-				int32 Coord1Index = GetGridIndex(Coords[0]);
-				int32 Coord2Index = GetGridIndex(Coords[1]);
+				int32 Coord1Index = AvailableSpaces.Find(Coords[0]);
+				int32 Coord2Index = AvailableSpaces.Find(Coords[1]);
 
 				if (Doors[i]->GetIsActive())
 				{
@@ -98,23 +107,16 @@ void AGameGrid::UpdateAdjacenyMatrix()
 			}
 		}
 	}
-
-	for (int i{ 0 }; i < GridBoxes.Num(); i++)
-	{
-		if (GridBoxes[GridCoords[i]]->DoesContainCrate())
-		{
-			for (int j{ 0 }; j < AdjacencyMatrix.Num(); j++)
-			{
-				AdjacencyMatrix[i].IntArray[j] = 0;
-				AdjacencyMatrix[j].IntArray[i] = 0;
-			}
-		}
-	}
 }
 
 TArray<FIntArray>* AGameGrid::GetAdjacencyMatrix()
 {
 	return &AdjacencyMatrix;
+}
+
+TArray<FVector2D> AGameGrid::GetAvailableSpaces()
+{
+	return AvailableSpaces;
 }
 
 AGridBox* AGameGrid::GetGridBox(FVector2D GridCoord)
