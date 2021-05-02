@@ -88,4 +88,6 @@ void APatrolEnemy::OnPlayerMove()
 	default:
 		break;
 	}
+
+	CheckIfStuck();
 }

@@ -40,9 +40,6 @@ protected:
 	UPROPERTY(BlueprintReadWrite)
 	TArray<ADoor*> Doors;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	TArray<ACrate*> Crates;
-
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -55,11 +52,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void CreateAdjacencyMatrix();
 	void UpdateAdjacenyMatrix();
+
 	TArray<FIntArray>* GetAdjacencyMatrix();
-
 	TArray<FVector2D> GetAvailableSpaces();
-
 	AGridBox* GetGridBox(FVector2D GridCoord);
-	FVector2D GetGridCoords(int32 GridIndex);
 
 };

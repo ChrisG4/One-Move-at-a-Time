@@ -10,26 +10,6 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 }
 
 
-void APlayerCharacter::MoveUp()
-{
-	Super::MoveUp();
-}
-
-void APlayerCharacter::MoveDown()
-{
-	Super::MoveDown();
-}
-
-void APlayerCharacter::MoveLeft()
-{
-	Super::MoveLeft();
-}
-
-void APlayerCharacter::MoveRight()
-{
-	Super::MoveRight();
-}
-
 void APlayerCharacter::CheckForBox(FVector2D GridCoord)
 {
 	ACrate* CrateCheck = nullptr;
@@ -59,7 +39,7 @@ void APlayerCharacter::CheckForBox(FVector2D GridCoord)
 
 		if (CrateCheck != nullptr)
 		{
-			if (GameGrid->IsGridSpaceFree(PositionToPushTo))
+			if (GameGrid->IsGridSpaceFree(PositionToPushTo) && !GameGrid->IsGridPathBlocked(GridPos, GridCoord) && !GameGrid->IsGridPathBlocked(GridCoord, PositionToPushTo))
 			{
 				if (GEngine)GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Green, ("To Push to : " + FString::SanitizeFloat(PositionToPushTo.X) + " " + FString::SanitizeFloat(PositionToPushTo.Y)));
 				CrateCheck->PushCrate(PositionToPushTo);

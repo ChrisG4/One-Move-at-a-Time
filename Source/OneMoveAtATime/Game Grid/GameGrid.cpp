@@ -35,6 +35,7 @@ void AGameGrid::SpawnGridBoxes()
 			Params.Owner = this;
 			
 			AGridBox* NewBox = GetWorld()->SpawnActor<AGridBox>(GridBoxType, GridBoxPositions[i] + GetActorLocation(), FRotator(0, 0, 0), Params);
+
 			GridBoxes.Add(NewBox->GetGridCoord(), NewBox);
 			GridCoords.Add(NewBox->GetGridCoord());
 		}
@@ -93,6 +94,11 @@ void AGameGrid::UpdateAdjacenyMatrix()
 				int32 Coord1Index = AvailableSpaces.Find(Coords[0]);
 				int32 Coord2Index = AvailableSpaces.Find(Coords[1]);
 
+				if (Coord1Index == INDEX_NONE || Coord2Index == INDEX_NONE)
+				{
+					return;
+				}
+
 				if (Doors[i]->GetIsActive())
 				{
 					AdjacencyMatrix[Coord1Index].IntArray[Coord2Index] = 0;
@@ -126,10 +132,4 @@ AGridBox* AGameGrid::GetGridBox(FVector2D GridCoord)
 	}
 
 	return nullptr;
-}
-
-
-FVector2D AGameGrid::GetGridCoords(int32 GridIndex)
-{
-	return GridCoords[GridIndex];
 }
