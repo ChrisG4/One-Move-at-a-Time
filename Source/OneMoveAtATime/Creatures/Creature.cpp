@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Creature.h"
 
 // Sets default values
@@ -68,22 +67,24 @@ bool ACreature::CanMoveToGridSpace(FVector2D GridSpace)
 
 void ACreature::MoveTo(FVector2D Coord)
 {
-	PrevGridPos = GridPos;
 	if (CanMoveToGridSpace(Coord))
 	{
-		SetActorLocation(FVector(Coord.X * UOMAATGameInstance::GridBoxSize, Coord.Y * UOMAATGameInstance::GridBoxSize, GetActorLocation().Z));
+		PrevGridPos = GridPos;
 		GridPos = Coord;
+		SetActorLocation(FVector(Coord.X * UOMAATGameInstance::GridBoxSize, Coord.Y * UOMAATGameInstance::GridBoxSize, GetActorLocation().Z));
 	}
 }
 
 void ACreature::MoveUp()
 {
 	PrevGridPos = GridPos;
+
 	FVector2D UpVec = FVector2D(0, -1);
 	if (CanMoveToGridSpace(GridPos + UpVec))
 	{
-		SetActorLocation(GetActorLocation() + FVector(UpVec * MoveSpeed, 0));
 		GridPos += UpVec;
+		SetActorLocation(GetActorLocation() + FVector(UpVec * MoveSpeed, 0));
+
 	}
 }
 
@@ -93,8 +94,9 @@ void ACreature::MoveDown()
 	FVector2D DownVec = FVector2D(0, 1);
 	if (CanMoveToGridSpace(GridPos + DownVec))
 	{
-		SetActorLocation(GetActorLocation() + FVector(DownVec * MoveSpeed, 0));
 		GridPos += DownVec;
+		SetActorLocation(GetActorLocation() + FVector(DownVec * MoveSpeed, 0));
+		
 	}
 }
 
@@ -104,8 +106,9 @@ void ACreature::MoveLeft()
 	FVector2D LeftVec = FVector2D(-1, 0);
 	if (CanMoveToGridSpace(GridPos + LeftVec))
 	{
-		SetActorLocation(GetActorLocation() + FVector(LeftVec * MoveSpeed, 0));
 		GridPos += LeftVec;
+		SetActorLocation(GetActorLocation() + FVector(LeftVec * MoveSpeed, 0));
+		
 	}
 }
 
@@ -115,8 +118,8 @@ void ACreature::MoveRight()
 	FVector2D RightVec = FVector2D(1, 0);
 	if (CanMoveToGridSpace(GridPos + RightVec))
 	{
-		SetActorLocation(GetActorLocation() + FVector(RightVec * MoveSpeed, 0));
 		GridPos += RightVec;
+		SetActorLocation(GetActorLocation() + FVector(RightVec * MoveSpeed, 0));
 	}
 }
 

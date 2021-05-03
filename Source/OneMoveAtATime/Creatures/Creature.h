@@ -48,7 +48,8 @@ public:
 	//MOVEMENT CHECKS
 	virtual bool CanMoveToGridSpace(FVector2D GridSpace);
 
-	//MOVEMENT FUNCTIONS
+
+	UFUNCTION(BlueprintCallable)
 	virtual void MoveTo(FVector2D Coord);
 
 	virtual void MoveUp();
