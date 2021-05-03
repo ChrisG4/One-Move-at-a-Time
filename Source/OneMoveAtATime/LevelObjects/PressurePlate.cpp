@@ -25,3 +25,7 @@ void APressurePlate::Tick(float DeltaTime)
 
 }
 
+bool APressurePlate::GetIsPressed()
+{
+	return this->bIsPressed;
+}

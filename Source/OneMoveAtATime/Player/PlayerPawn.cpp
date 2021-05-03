@@ -47,6 +47,7 @@ void APlayerPawn::PlayerMove(FVector2D MovementVec)
 		{
 			MainPlayer->MoveTo(TargetSpace);
 			MoveEnemies();
+			UpdateGameGrid();
 			DidPlayerDie();
 		}
 	}
@@ -70,6 +71,11 @@ void APlayerPawn::PlayerMoveLeft()
 void APlayerPawn::PlayerMoveRight()
 {
 	PlayerMove(FVector2D(1, 0));
+}
+
+void APlayerPawn::UpdateGameGrid()
+{
+	MainPlayer->GetGameGrid()->UpdateGameGrid();
 }
 
 void APlayerPawn::MoveEnemies()

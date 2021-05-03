@@ -49,6 +49,8 @@ public:
 	bool IsGridSpaceFree(FVector2D GridCoord);
 	bool IsGridPathBlocked(FVector2D Coord1, FVector2D Coor2);
 
+	void UpdateGameGrid();
+
 	UFUNCTION(BlueprintCallable)
 	void CreateAdjacencyMatrix();
 	void UpdateAdjacenyMatrix();

@@ -36,6 +36,24 @@ TArray<FVector2D> ADoor::GetGridBoxCoords()
 	return GridBoxCoords;
 }
 
+void ADoor::UpdateActive()
+{
+	for (int i{ 0 }; i < PressurePlates.Num(); i++)
+	{
+		if (PressurePlates[i].PressurePlate != nullptr &&
+			PressurePlates[i].PressurePlate->GetIsPressed() == PressurePlates[i].InvertInput)
+		{
+			this->bIsActive = false;
+			UpdateVisibility(bIsActive);
+
+			return;
+		}
+	}
+
+	bIsActive = true;
+	UpdateVisibility(bIsActive);
+}
+
 bool ADoor::GetIsActive()
 {
 	return this->bIsActive;

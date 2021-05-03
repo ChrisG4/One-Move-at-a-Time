@@ -69,6 +69,14 @@ bool AGameGrid::IsGridPathBlocked(FVector2D Coord1, FVector2D Coord2)
 	return false;
 }
 
+void AGameGrid::UpdateGameGrid()
+{
+	for (int i{ 0 }; i < Doors.Num(); i++)
+	{
+		Doors[i]->UpdateActive();
+	}
+}
+
 void AGameGrid::CreateAdjacencyMatrix()
 {
 	AvailableSpaces.Empty();

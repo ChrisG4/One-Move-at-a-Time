@@ -39,6 +39,7 @@ public:
 	void PlayerMoveLeft();
 	void PlayerMoveRight();
 
+	void UpdateGameGrid();
 	void MoveEnemies();
 
 	bool DidPlayerDie();

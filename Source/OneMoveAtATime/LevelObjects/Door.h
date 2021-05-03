@@ -5,7 +5,21 @@
 #include "CoreMinimal.h"
 #include "LevelObject.h"
 #include "..\Game Grid\GridBox.h"
+#include "PressurePlate.h"
 #include "Door.generated.h"
+
+USTRUCT()
+struct FInput
+{
+	GENERATED_BODY()
+	
+	//INVERTED INPUT = Button not being pressed is active
+	UPROPERTY(EditAnywhere)
+	bool InvertInput;
+
+	UPROPERTY(EditAnywhere)
+	APressurePlate* PressurePlate;
+};
 
 UCLASS()
 class ONEMOVEATATIME_API ADoor : public ALevelObject
@@ -29,10 +43,19 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	bool bIsActive = true;
 
+	UPROPERTY(EditAnywhere, Category = "Switches")
+		TArray<FInput> PressurePlates;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	TArray<FVector2D> GetGridBoxCoords();
+
+	void UpdateActive();
+	
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateVisibility(bool IsActive);
+
 	bool GetIsActive();
 };
