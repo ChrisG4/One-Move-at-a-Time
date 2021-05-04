@@ -7,9 +7,14 @@
 #include "..\Player/PlayerCharacter.h"
 #include "ChaserEnemy.generated.h"
 
-/**
- * 
- */
+
+UENUM()
+enum State
+{
+	Idle UMETA(DisplayName = "Idle"),
+	Chasing UMETA(DisplayName = "Chasing"),
+};
+
 UCLASS()
 class ONEMOVEATATIME_API AChaserEnemy : public AEnemy
 {
@@ -40,9 +45,18 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Pathfinding")
 	TArray<FVector2D> PossibleMoves;
 
+	UPROPERTY(VisibleAnywhere, Category = "Vision")
+	TArray<FVector2D> VisionCoords;
+
+	State CurrentState;
+
 public:
 
 	void OnPlayerMove() override;
+	
+	void SetVisionCoords();
+	void CheckVision();
+
 	void FindPlayer();
 
 	void FindPossibleMoves();

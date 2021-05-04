@@ -9,16 +9,62 @@ void AChaserEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 
-	
+	SetVisionCoords();
+	CurrentState = Idle;
+	bIsStuck = true;
 }
 
 void AChaserEnemy::OnPlayerMove()
 {
-	FindPlayer();
-	FindPossibleMoves();
-	SelectNextMove();
-	CheckIfStuck();
-	Move();
+	switch (CurrentState)
+	{
+	case Idle:
+		SetVisionCoords();
+		CheckVision();
+		break;
+
+	case Chasing:
+		FindPlayer();
+		FindPossibleMoves();
+		SelectNextMove();
+		CheckIfStuck();
+		Move();
+	}
+}
+
+void AChaserEnemy::SetVisionCoords()
+{
+	VisionCoords.Empty();
+	VisionCoords.Push(GridPos);
+	
+	//GETS COLUMNS AND ROWS
+	TArray<FVector2D> DirectionVecs = { FVector2D(0, 1), FVector2D(0, -1), FVector2D(1, 0), FVector2D(-1, 0) };
+	for (int i{ 0 }; i < DirectionVecs.Num(); i++)
+	{
+		for (int j{ 1 }; 1 == 1; j++)
+		{
+
+			if (GameGrid->IsGridSpaceFree(GridPos + j * DirectionVecs[i]) && !GameGrid->IsGridPathBlocked(GridPos + (j - 1) * DirectionVecs[i], GridPos + j * DirectionVecs[i]))
+			{
+				VisionCoords.Push(GridPos + j * DirectionVecs[i]);
+			}
+			else
+			{
+				break;
+			}
+		}
+	}
+}
+
+void AChaserEnemy::CheckVision()
+{
+	for (int i{ 0 }; i < VisionCoords.Num(); i++)
+	{
+		if (PlayerCharacter->GetGridPos() == VisionCoords[i])
+		{
+			CurrentState = Chasing;
+		}
+	}
 }
 
 void AChaserEnemy::FindPlayer()
