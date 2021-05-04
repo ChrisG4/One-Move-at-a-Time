@@ -91,3 +91,8 @@ void APatrolEnemy::OnPlayerMove()
 
 	CheckIfStuck();
 }
+
+void APatrolEnemy::OnTeleport(Direction NewDirection)
+{
+	CurrentMoveDirection = NewDirection;
+}

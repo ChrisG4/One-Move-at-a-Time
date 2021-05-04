@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "LevelObject.h"
+#include "..\Creatures/PatrolEnemy.h"
 #include "Portal.generated.h"
 
 /**
@@ -18,7 +19,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (MakeEditWidget = "true"))
 		FVector OutputLocation1;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TEnumAsByte<Direction> OutputDirection1;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (MakeEditWidget = "true"))
 		FVector OutputLocation2;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TEnumAsByte<Direction> OutputDirection2;
 };

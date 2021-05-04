@@ -42,4 +42,6 @@ public:
 	void CheckIfStuck() override;
 	void UpdateMoveDirection();
 
+	UFUNCTION(BlueprintCallable)
+		void OnTeleport(Direction NewDirection);
 };
