@@ -32,6 +32,11 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Grid Information")
 		FVector2D PrevGridPos;
 
+	const FVector2D UpVec = FVector2D(0, -1);
+	const FVector2D DownVec = FVector2D(0, 1);
+	const FVector2D LeftVec = FVector2D(-1, 0);
+	const FVector2D RightVec = FVector2D(1, 0);
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

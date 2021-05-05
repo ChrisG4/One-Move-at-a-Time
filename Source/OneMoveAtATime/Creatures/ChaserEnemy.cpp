@@ -38,7 +38,7 @@ void AChaserEnemy::SetVisionCoords()
 	VisionCoords.Push(GridPos);
 	
 	//GETS COLUMNS AND ROWS
-	TArray<FVector2D> DirectionVecs = { FVector2D(0, 1), FVector2D(0, -1), FVector2D(1, 0), FVector2D(-1, 0) };
+	TArray<FVector2D> DirectionVecs = { UpVec, DownVec, LeftVec, RightVec };
 	for (int i{ 0 }; i < DirectionVecs.Num(); i++)
 	{
 		for (int j{ 1 }; 1 == 1; j++)
@@ -53,6 +53,23 @@ void AChaserEnemy::SetVisionCoords()
 				break;
 			}
 		}
+	}
+
+	if (GameGrid->IsGridSpaceFree(GridPos + UpVec) && GameGrid->IsGridSpaceFree(GridPos + LeftVec) && GameGrid->IsGridSpaceFree(GridPos + UpVec + LeftVec))
+	{
+		VisionCoords.Push(GridPos + UpVec + LeftVec);
+	}
+	if (GameGrid->IsGridSpaceFree(GridPos + UpVec) && GameGrid->IsGridSpaceFree(GridPos + RightVec) && GameGrid->IsGridSpaceFree(GridPos + UpVec + RightVec))
+	{
+		VisionCoords.Push(GridPos + UpVec + RightVec);
+	}
+	if (GameGrid->IsGridSpaceFree(GridPos + DownVec) && GameGrid->IsGridSpaceFree(GridPos + LeftVec) && GameGrid->IsGridSpaceFree(GridPos + DownVec + LeftVec))
+	{
+		VisionCoords.Push(GridPos + DownVec + LeftVec);
+	}
+	if (GameGrid->IsGridSpaceFree(GridPos + DownVec) && GameGrid->IsGridSpaceFree(GridPos + RightVec) && GameGrid->IsGridSpaceFree(GridPos + DownVec + RightVec))
+	{
+		VisionCoords.Push(GridPos + DownVec + RightVec);
 	}
 }
 

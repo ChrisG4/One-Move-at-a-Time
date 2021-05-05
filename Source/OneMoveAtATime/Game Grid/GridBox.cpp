@@ -20,7 +20,7 @@ void AGridBox::BeginPlay()
 	}
 	
 	SetGridCoord();
-	DrawDebugBox(GetWorld(), GetActorLocation(), GetComponentsBoundingBox().GetExtent(), FColor::Green, true, -1, 0, 2);
+	//DrawDebugBox(GetWorld(), GetActorLocation(), GetComponentsBoundingBox().GetExtent(), FColor::Green, true, -1, 0, 2);
 }
 
 bool AGridBox::IsPlacementValid()

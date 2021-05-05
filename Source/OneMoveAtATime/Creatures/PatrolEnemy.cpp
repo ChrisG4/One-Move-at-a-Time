@@ -15,25 +15,25 @@ void APatrolEnemy::UpdateMoveDirection()
 	switch (CurrentMoveDirection)
 	{
 	case Up:
-		if (!CanMoveToGridSpace(GridPos + FVector2D(0, -1)))
+		if (!CanMoveToGridSpace(GridPos + UpVec))
 		{
 			CurrentMoveDirection = Down;
 		}
 		break;
 	case Down:
-		if (!CanMoveToGridSpace(GridPos + FVector2D(0, 1)))
+		if (!CanMoveToGridSpace(GridPos + DownVec))
 		{
 			CurrentMoveDirection = Up;
 		}
 		break;
 	case Left:
-		if (!CanMoveToGridSpace(GridPos + FVector2D(-1, 0)))
+		if (!CanMoveToGridSpace(GridPos + LeftVec))
 		{
 			CurrentMoveDirection = Right;
 		}
 		break;
 	case Right:
-		if (!CanMoveToGridSpace(GridPos + FVector2D(1, 0)))
+		if (!CanMoveToGridSpace(GridPos + RightVec))
 		{
 			CurrentMoveDirection = Left;
 		}
@@ -47,7 +47,7 @@ void APatrolEnemy::CheckIfStuck()
 {
 	if (CurrentMoveDirection == Up || CurrentMoveDirection == Down)
 	{
-		if (!CanMoveToGridSpace(GridPos + FVector2D(0, -1)) && !CanMoveToGridSpace(GridPos + FVector2D(0, 1)))
+		if (!CanMoveToGridSpace(GridPos + UpVec) && !CanMoveToGridSpace(GridPos + DownVec))
 		{
 			bIsStuck = true;
 			return;
@@ -56,7 +56,7 @@ void APatrolEnemy::CheckIfStuck()
 	
 	if (CurrentMoveDirection == Left || CurrentMoveDirection == Right)
 	{
-		if (!CanMoveToGridSpace(GridPos + FVector2D(-1, 0)) && !CanMoveToGridSpace(GridPos + FVector2D(1, 0)))
+		if (!CanMoveToGridSpace(GridPos + LeftVec) && !CanMoveToGridSpace(GridPos + RightVec))
 		{
 			bIsStuck = true;
 			return;
