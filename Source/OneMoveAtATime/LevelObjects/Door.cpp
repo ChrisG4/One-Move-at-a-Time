@@ -41,16 +41,16 @@ void ADoor::UpdateActive()
 	for (int i{ 0 }; i < PressurePlates.Num(); i++)
 	{
 		if (PressurePlates[i].PressurePlate != nullptr &&
-			PressurePlates[i].PressurePlate->GetIsPressed() == PressurePlates[i].InvertInput)
+			PressurePlates[i].PressurePlate->GetIsPressed() != PressurePlates[i].InvertInput)
 		{
-			this->bIsActive = false;
+			this->bIsActive = true;
 			UpdateVisibility(bIsActive);
 
 			return;
 		}
 	}
 
-	bIsActive = true;
+	bIsActive = false;
 	UpdateVisibility(bIsActive);
 }
 

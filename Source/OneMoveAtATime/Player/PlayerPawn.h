@@ -25,6 +25,9 @@ protected:
 	UPROPERTY(BlueprintReadWrite)
 		TArray<AEnemy*> Enemies;
 
+	UPROPERTY(EditDefaultsOnly)
+		USoundBase* PlayerMoveSound;
+
 public:	
 	APlayerPawn();
 

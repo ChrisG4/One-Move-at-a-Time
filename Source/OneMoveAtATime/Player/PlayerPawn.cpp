@@ -2,6 +2,7 @@
 
 
 #include "PlayerPawn.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 APlayerPawn::APlayerPawn()
@@ -45,6 +46,9 @@ void APlayerPawn::PlayerMove(FVector2D MovementVec)
 
 		if (MainPlayer->CanMoveToGridSpace(TargetSpace))
 		{
+			if (PlayerMoveSound != nullptr)
+				UGameplayStatics::PlaySound2D(GetWorld(), PlayerMoveSound, 1.0f, 1.0f, 0.0f);
+
 			MainPlayer->MoveTo(TargetSpace);
 			MoveEnemies();
 			UpdateGameGrid();
