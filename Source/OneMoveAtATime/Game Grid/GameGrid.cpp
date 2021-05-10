@@ -69,6 +69,16 @@ bool AGameGrid::IsGridPathBlocked(FVector2D Coord1, FVector2D Coord2)
 	return false;
 }
 
+bool AGameGrid::DoesSpaceContainEnemy(FVector2D GridCoord)
+{
+	if (GridBoxes.Contains(GridCoord) && GridBoxes[GridCoord]->DoesContainEnemy())
+	{
+		return true;
+	}
+
+	return false;
+}
+
 void AGameGrid::UpdateGameGrid()
 {
 	for (int i{ 0 }; i < Doors.Num(); i++)

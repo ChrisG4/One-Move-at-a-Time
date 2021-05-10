@@ -5,7 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "PlayerCharacter.h"
-#include "..\Creatures\Enemy.h"
+#include "..\Creatures\PatrolEnemy.h"
+#include "..\Creatures\ChaserEnemy.h"
 #include "PlayerPawn.generated.h"
 
 UCLASS()
@@ -22,8 +23,14 @@ protected:
 	UPROPERTY(BlueprintReadWrite)
 		APlayerCharacter* MainPlayer;
 
-	UPROPERTY(BlueprintReadWrite)
-		TArray<AEnemy*> Enemies;
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+		TArray<APatrolEnemy*> PatrolEnemies;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+		TArray<AChaserEnemy*> ChaserEnemies;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+		TArray<AEnemy*> AllEnemies;
 
 	UPROPERTY(EditDefaultsOnly)
 		USoundBase* PlayerMoveSound;
@@ -46,4 +53,5 @@ public:
 	void MoveEnemies();
 
 	bool DidPlayerDie();
+	void CheckEnemyCollisions();
 };

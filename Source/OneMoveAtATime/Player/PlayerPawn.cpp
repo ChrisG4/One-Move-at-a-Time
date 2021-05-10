@@ -52,6 +52,7 @@ void APlayerPawn::PlayerMove(FVector2D MovementVec)
 			MainPlayer->MoveTo(TargetSpace);
 			MoveEnemies();
 			UpdateGameGrid();
+			CheckEnemyCollisions();
 			DidPlayerDie();
 		}
 	}
@@ -86,18 +87,23 @@ void APlayerPawn::MoveEnemies()
 {
 	MainPlayer->GetGameGrid()->CreateAdjacencyMatrix();
 
-	for (int i{ 0 }; i < Enemies.Num(); i++)
+	for (int i{ 0 }; i < PatrolEnemies.Num(); i++)
 	{
-		Enemies[i]->OnPlayerMove();
+		PatrolEnemies[i]->OnPlayerMove();
+	}
+
+	for (int i{ 0 }; i < ChaserEnemies.Num(); i++)
+	{
+		ChaserEnemies[i]->OnPlayerMove();
 	}
 }
 
 bool APlayerPawn::DidPlayerDie()
-{
-	for (int i{ 0 }; i < Enemies.Num(); i++)
+{	
+	for (int i{ 0 }; i < AllEnemies.Num(); i++)
 	{
-		if (Enemies[i]->GetGridPos() == MainPlayer->GetGridPos() ||
-			(Enemies[i]->GetPrevGridPos() == MainPlayer->GetGridPos()) && (Enemies[i]->GetGridPos() == MainPlayer->GetPrevGridPos()))
+		if (AllEnemies[i]->GetGridPos() == MainPlayer->GetGridPos() ||
+			(AllEnemies[i]->GetPrevGridPos() == MainPlayer->GetGridPos()) && (AllEnemies[i]->GetGridPos() == MainPlayer->GetPrevGridPos()))
 		{
 			if (GEngine)GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "PLAYER DEAD");
 			return true;
@@ -105,4 +111,45 @@ bool APlayerPawn::DidPlayerDie()
 	}
 
 	return false;
+}
+
+void APlayerPawn::CheckEnemyCollisions()
+{
+	for (int i{ 0 }; i < AllEnemies.Num(); i++)
+	{
+		for (int j{ 0 }; j < AllEnemies.Num(); j++)
+		{
+			if (i != j && AllEnemies[i] != nullptr && AllEnemies[j] != nullptr
+				&& (AllEnemies[i]->GetGridPos() == AllEnemies[j]->GetGridPos()
+					|| (AllEnemies[i]->GetPrevGridPos() == AllEnemies[j]->GetGridPos() && AllEnemies[i]->GetGridPos() == AllEnemies[j]->GetPrevGridPos())))
+			{
+				AllEnemies[i]->Destroy();
+				AllEnemies[j]->Destroy();
+			}
+		}
+	}
+
+	for (int i{ AllEnemies.Num() - 1}; i >= 0; i--)
+	{
+		if (!IsValid(AllEnemies[i]))
+		{
+			AllEnemies.RemoveAt(i);
+		}
+	}
+
+	for (int i{ PatrolEnemies.Num() - 1 }; i >= 0; i--)
+	{
+		if (!IsValid(PatrolEnemies[i]))
+		{
+			PatrolEnemies.RemoveAt(i);
+		}
+	}
+
+	for (int i{ ChaserEnemies.Num() - 1 }; i >= 0; i--)
+	{
+		if (!IsValid(ChaserEnemies[i]))
+		{
+			ChaserEnemies.RemoveAt(i);
+		}
+	}
 }

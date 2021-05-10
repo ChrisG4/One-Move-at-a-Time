@@ -48,6 +48,7 @@ public:
 
 	bool IsGridSpaceFree(FVector2D GridCoord);
 	bool IsGridPathBlocked(FVector2D Coord1, FVector2D Coor2);
+	bool DoesSpaceContainEnemy(FVector2D GridCoord);
 
 	void UpdateGameGrid();
 

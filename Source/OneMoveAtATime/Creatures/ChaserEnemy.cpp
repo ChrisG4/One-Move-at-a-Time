@@ -44,7 +44,8 @@ void AChaserEnemy::SetVisionCoords()
 		for (int j{ 1 }; 1 == 1; j++)
 		{
 
-			if (GameGrid->IsGridSpaceFree(GridPos + j * DirectionVecs[i]) && !GameGrid->IsGridPathBlocked(GridPos + (j - 1) * DirectionVecs[i], GridPos + j * DirectionVecs[i]))
+			if (GameGrid->IsGridSpaceFree(GridPos + j * DirectionVecs[i]) && !GameGrid->IsGridPathBlocked(GridPos + (j - 1) * DirectionVecs[i], GridPos + j * DirectionVecs[i])
+				&& !GameGrid->DoesSpaceContainEnemy(GridPos + j * DirectionVecs[i]))
 			{
 				VisionCoords.Push(GridPos + j * DirectionVecs[i]);
 			}
