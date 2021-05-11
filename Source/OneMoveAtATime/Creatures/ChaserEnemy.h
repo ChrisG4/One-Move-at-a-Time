@@ -45,7 +45,7 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Pathfinding")
 	TArray<FVector2D> PossibleMoves;
 
-	UPROPERTY(VisibleAnywhere, Category = "Vision")
+	UPROPERTY(VisibleAnywhere, Category = "Vision", BlueprintReadWrite)
 	TArray<FVector2D> VisionCoords;
 
 	State CurrentState;
@@ -53,9 +53,15 @@ protected:
 public:
 
 	void OnPlayerMove() override;
-	
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void CreateVisionSprites();
+
 	void SetVisionCoords();
 	void CheckVision();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnBeginChase();
 
 	void FindPlayer();
 

@@ -72,6 +72,8 @@ void AChaserEnemy::SetVisionCoords()
 	{
 		VisionCoords.Push(GridPos + DownVec + RightVec);
 	}
+
+	CreateVisionSprites();
 }
 
 void AChaserEnemy::CheckVision()
@@ -81,6 +83,7 @@ void AChaserEnemy::CheckVision()
 		if (PlayerCharacter->GetGridPos() == VisionCoords[i])
 		{
 			CurrentState = Chasing;
+			OnBeginChase();
 		}
 	}
 }
