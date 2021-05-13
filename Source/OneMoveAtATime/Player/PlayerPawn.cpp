@@ -152,4 +152,12 @@ void APlayerPawn::CheckEnemyCollisions()
 			ChaserEnemies.RemoveAt(i);
 		}
 	}
+
+	for (int i{ 0 }; i < ChaserEnemies.Num(); i++)
+	{
+		if (IsValid(ChaserEnemies[i]))
+		{
+			ChaserEnemies[i]->SetVisionCoords();
+		}
+	}
 }

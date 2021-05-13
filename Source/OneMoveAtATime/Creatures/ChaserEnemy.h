@@ -57,6 +57,7 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void CreateVisionSprites();
 
+	UFUNCTION(BlueprintCallable)
 	void SetVisionCoords();
 	void CheckVision();
 

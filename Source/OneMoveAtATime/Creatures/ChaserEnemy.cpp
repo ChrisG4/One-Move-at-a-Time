@@ -9,7 +9,6 @@ void AChaserEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 
-	SetVisionCoords();
 	CurrentState = Idle;
 	bIsStuck = true;
 }
@@ -34,46 +33,49 @@ void AChaserEnemy::OnPlayerMove()
 
 void AChaserEnemy::SetVisionCoords()
 {
-	VisionCoords.Empty();
-	VisionCoords.Push(GridPos);
-	
-	//GETS COLUMNS AND ROWS
-	TArray<FVector2D> DirectionVecs = { UpVec, DownVec, LeftVec, RightVec };
-	for (int i{ 0 }; i < DirectionVecs.Num(); i++)
+	if (CurrentState == Idle)
 	{
-		for (int j{ 1 }; 1 == 1; j++)
-		{
+		VisionCoords.Empty();
+		VisionCoords.Push(GridPos);
 
-			if (GameGrid->IsGridSpaceFree(GridPos + j * DirectionVecs[i]) && !GameGrid->IsGridPathBlocked(GridPos + (j - 1) * DirectionVecs[i], GridPos + j * DirectionVecs[i])
-				&& !GameGrid->DoesSpaceContainEnemy(GridPos + j * DirectionVecs[i]))
+		//GETS COLUMNS AND ROWS
+		TArray<FVector2D> DirectionVecs = { UpVec, DownVec, LeftVec, RightVec };
+		for (int i{ 0 }; i < DirectionVecs.Num(); i++)
+		{
+			for (int j{ 1 }; 1 == 1; j++)
 			{
-				VisionCoords.Push(GridPos + j * DirectionVecs[i]);
-			}
-			else
-			{
-				break;
+
+				if (GameGrid->IsGridSpaceFree(GridPos + j * DirectionVecs[i]) && !GameGrid->IsGridPathBlocked(GridPos + (j - 1) * DirectionVecs[i], GridPos + j * DirectionVecs[i])
+					&& !GameGrid->DoesSpaceContainEnemy(GridPos + j * DirectionVecs[i]))
+				{
+					VisionCoords.Push(GridPos + j * DirectionVecs[i]);
+				}
+				else
+				{
+					break;
+				}
 			}
 		}
-	}
 
-	if (GameGrid->IsGridSpaceFree(GridPos + UpVec) && GameGrid->IsGridSpaceFree(GridPos + LeftVec) && GameGrid->IsGridSpaceFree(GridPos + UpVec + LeftVec))
-	{
-		VisionCoords.Push(GridPos + UpVec + LeftVec);
-	}
-	if (GameGrid->IsGridSpaceFree(GridPos + UpVec) && GameGrid->IsGridSpaceFree(GridPos + RightVec) && GameGrid->IsGridSpaceFree(GridPos + UpVec + RightVec))
-	{
-		VisionCoords.Push(GridPos + UpVec + RightVec);
-	}
-	if (GameGrid->IsGridSpaceFree(GridPos + DownVec) && GameGrid->IsGridSpaceFree(GridPos + LeftVec) && GameGrid->IsGridSpaceFree(GridPos + DownVec + LeftVec))
-	{
-		VisionCoords.Push(GridPos + DownVec + LeftVec);
-	}
-	if (GameGrid->IsGridSpaceFree(GridPos + DownVec) && GameGrid->IsGridSpaceFree(GridPos + RightVec) && GameGrid->IsGridSpaceFree(GridPos + DownVec + RightVec))
-	{
-		VisionCoords.Push(GridPos + DownVec + RightVec);
-	}
+		if (GameGrid->IsGridSpaceFree(GridPos + UpVec) && GameGrid->IsGridSpaceFree(GridPos + LeftVec) && GameGrid->IsGridSpaceFree(GridPos + UpVec + LeftVec))
+		{
+			VisionCoords.Push(GridPos + UpVec + LeftVec);
+		}
+		if (GameGrid->IsGridSpaceFree(GridPos + UpVec) && GameGrid->IsGridSpaceFree(GridPos + RightVec) && GameGrid->IsGridSpaceFree(GridPos + UpVec + RightVec))
+		{
+			VisionCoords.Push(GridPos + UpVec + RightVec);
+		}
+		if (GameGrid->IsGridSpaceFree(GridPos + DownVec) && GameGrid->IsGridSpaceFree(GridPos + LeftVec) && GameGrid->IsGridSpaceFree(GridPos + DownVec + LeftVec))
+		{
+			VisionCoords.Push(GridPos + DownVec + LeftVec);
+		}
+		if (GameGrid->IsGridSpaceFree(GridPos + DownVec) && GameGrid->IsGridSpaceFree(GridPos + RightVec) && GameGrid->IsGridSpaceFree(GridPos + DownVec + RightVec))
+		{
+			VisionCoords.Push(GridPos + DownVec + RightVec);
+		}
 
-	CreateVisionSprites();
+		CreateVisionSprites();
+	}
 }
 
 void AChaserEnemy::CheckVision()
