@@ -44,7 +44,7 @@ protected:
 	bool bIsActive = true;
 
 	UPROPERTY(EditAnywhere, Category = "Switches")
-		TArray<FInput> PressurePlates;
+		TArray<APressurePlate*> PressurePlates;
 
 public:	
 	// Called every frame
@@ -52,6 +52,9 @@ public:
 
 	TArray<FVector2D> GetGridBoxCoords();
 
+	bool IsWall();
+
+	UFUNCTION(BlueprintCallable)
 	void UpdateActive();
 	
 	UFUNCTION(BlueprintImplementableEvent)
