@@ -94,7 +94,12 @@ void APlayerPawn::MoveEnemies()
 
 	for (int i{ 0 }; i < ChaserEnemies.Num(); i++)
 	{
-		ChaserEnemies[i]->OnPlayerMove();
+		ChaserEnemies[i]->UpdatePosition();
+	}
+
+	for (int i{ 0 }; i < ChaserEnemies.Num(); i++)
+	{
+		ChaserEnemies[i]->UpdateVision();
 	}
 }
 
@@ -105,7 +110,8 @@ bool APlayerPawn::DidPlayerDie()
 		if (AllEnemies[i]->GetGridPos() == MainPlayer->GetGridPos() ||
 			(AllEnemies[i]->GetPrevGridPos() == MainPlayer->GetGridPos()) && (AllEnemies[i]->GetGridPos() == MainPlayer->GetPrevGridPos()))
 		{
-			if (GEngine)GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "PLAYER DEAD");
+			MainPlayer->Destroy();
+			MainPlayer = nullptr;
 			return true;
 		}
 	}
