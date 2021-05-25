@@ -52,8 +52,8 @@ void APlayerPawn::PlayerMove(FVector2D MovementVec)
 			MainPlayer->MoveTo(TargetSpace);
 			MoveEnemies();
 			UpdateGameGrid();
-			CheckEnemyCollisions();
 			DidPlayerDie();
+			CheckEnemyCollisions();
 		}
 	}
 }
