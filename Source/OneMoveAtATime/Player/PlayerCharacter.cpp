@@ -3,6 +3,7 @@
 
 #include "PlayerCharacter.h"
 #include "..\Creatures\Enemy.h"
+#include "..\Creatures\ChaserEnemy.h"
 
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -25,13 +26,10 @@ void APlayerCharacter::CheckForBox(FVector2D GridCoord)
 
 
 		if (GameGrid->GetGridBox(PositionToPushTo)->GetOccupyingEntity() != nullptr) {
-			print("Entity Exists");
 			if (Cast<AEnemy>(GameGrid->GetGridBox(PositionToPushTo)->GetOccupyingEntity()) != nullptr)
 			{
-				print("Enemy Found");
-				if (Cast<AEnemy>(GameGrid->GetGridBox(PositionToPushTo)->GetOccupyingEntity())->IsStuck())
+				if (Cast<AEnemy>(GameGrid->GetGridBox(PositionToPushTo)->GetOccupyingEntity())->IsStuck() || Cast<AChaserEnemy>(GameGrid->GetGridBox(PositionToPushTo)->GetOccupyingEntity()))
 				{
-					print("Entity Stuck");
 					return;
 				}
 			}
