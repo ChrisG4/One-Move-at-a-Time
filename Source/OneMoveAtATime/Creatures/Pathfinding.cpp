@@ -92,6 +92,7 @@ TArray<FIntArray> Pathfinding::GetShortestPaths(TArray<FIntArray> AdjacencyMatri
 			{
 				if (!VisitedSpaces.Contains(j)
 					&& AdjacencyMatrix[PossiblePaths[i].IntArray.Last()].IntArray[j] == 1)
+
 				{
 					FIntArray NewPath = PossiblePaths[i];
 					NewPath.IntArray.Push(j);

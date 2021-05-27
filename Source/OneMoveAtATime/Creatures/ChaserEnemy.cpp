@@ -28,6 +28,28 @@ void AChaserEnemy::OnPlayerMove()
 		SelectNextMove();
 		CheckIfStuck();
 		Move();
+		break;
+	}
+}
+
+void AChaserEnemy::UpdatePosition()
+{
+	if (CurrentState == Chasing)
+	{
+		FindPlayer();
+		FindPossibleMoves();
+		SelectNextMove();
+		CheckIfStuck();
+		Move();
+	}
+}
+
+void AChaserEnemy::UpdateVision()
+{
+	if (CurrentState == Idle)
+	{
+		SetVisionCoords();
+		CheckVision();
 	}
 }
 

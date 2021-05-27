@@ -51,6 +51,8 @@ protected:
 	State CurrentState;
 
 public:
+	void UpdatePosition();
+	void UpdateVision();
 
 	void OnPlayerMove() override;
 
