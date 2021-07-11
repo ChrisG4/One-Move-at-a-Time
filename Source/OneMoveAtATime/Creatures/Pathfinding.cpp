@@ -77,9 +77,6 @@ TArray<FIntArray> Pathfinding::GetShortestPaths(TArray<FIntArray> AdjacencyMatri
 	//CHECK IF SHOULD STAY STILL
 	if (StartSpace == EndSpace)
 	{
-		FIntArray StayStill;
-		StayStill.IntArray = TArray<int32>{ 0, StartSpace };
-		FinalPaths.Push(StayStill);
 		goto StayStill;
 	}
 
@@ -114,12 +111,9 @@ TArray<FIntArray> Pathfinding::GetShortestPaths(TArray<FIntArray> AdjacencyMatri
 			}
 		}
 
-
+		//NO POSSIBLE PATH
 		if (NewPaths.Num() == 0 && FinalPaths.Num() == 0)
 		{
-			FIntArray StayStill;
-			StayStill.IntArray = TArray<int32>{ 0, StartSpace };
-			FinalPaths.Push(StayStill);
 			goto StayStill;
 		}
 
@@ -135,7 +129,13 @@ TArray<FIntArray> Pathfinding::GetShortestPaths(TArray<FIntArray> AdjacencyMatri
 
 	} while (FinalPaths.Num() == 0);
 
+	return FinalPaths;
+
 StayStill:;
+
+	FIntArray StayStill;
+	StayStill.IntArray = TArray<int32>{ 0, StartSpace };
+	FinalPaths.Push(StayStill);
 
 	return FinalPaths;
 }
